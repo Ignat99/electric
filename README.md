@@ -6,10 +6,14 @@ Electric VLSI Design System
 
 Electric is written in the Java programming language and is distributed in a
 single ".jar" file.  There are two variations on the ".jar" file:
+
   With source code (called "electric-X.XX.jar")
+  
   Without source code (called, "electricBinary-X.XX.jar").
+  
 Both of these files have the binary ".class" files needed to run Electric,
 but the one with source-code is larger because it also has all of the Java code.
+
 Latest source code can be downloaded from Electric Home Page:
 http://savannah.gnu.org/projects/electric .
 
