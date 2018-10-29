@@ -1,0 +1,121 @@
+(in-package "SV")
+
+(include-book "std/util/defconsts" :dir :system)
+(include-book "std/util/defrule" :dir :system)
+(include-book "centaur/sv/mods/compile" :dir :system)
+
+(local (include-book "std/basic/arith-equivs" :dir :system))
+(local (include-book "std/lists/resize-list" :dir :system))
+(local (include-book "std/lists/take" :dir :system))
+(local (include-book "std/osets/under-set-equiv" :dir :system))
+(local (in-theory (disable nfix natp)))
+
+(defconsts (*$DESIGN$* state)
+  (serialize-read "$DESIGN$.sao"))
+
+(defconsts (*$DESIGN$-results* state)
+  (serialize-read "$DESIGN$-indexed.sao"))
+
+(defconst *$DESIGN$-indexed*      (nth 0 *$DESIGN$-results*))
+(defconst *$DESIGN$-flat-aliases* (nth 1 *$DESIGN$-results*))
+(defconst *$DESIGN$-flat-assigns* (nth 2 *$DESIGN$-results*))
+(defconst *$DESIGN$-aliases-list* (nth 3 *$DESIGN$-results*))
+
+(define svex-design-flatten-modified ((x design-p)
+                             &key
+                             ((moddb "overwritten") 'moddb)
+                             ((aliases "overwritten") 'aliases))
+  :returns (mv err
+               (indexed-modalist modalist-p)
+               (flat-aliases lhspairs-p)
+               (flat-assigns assigns-p)
+               ;; (flat-delays svar-map-p)
+               (moddb (and (moddb-basics-ok moddb)
+                           (moddb-mods-ok moddb)))
+               (aliases (implies (not err)
+                                 (aliases-normorderedp aliases))))
+  :guard (svarlist-addr-p (modalist-vars (design->modalist x)))
+  :verify-guards nil
+  :prepwork ((local (in-theory (enable modscope->top modscope->modidx modscope-okp
+                                       modscope-top-bound modscope-okp))))
+
+  (b* ((moddb (moddb-clear moddb))
+       (aliases (aliases-fix aliases))
+       ((design x) x)
+       (modalist x.modalist)
+       (topmod x.top)
+       ((with-fast modalist))
+       ((unless (cwtime (modhier-loopfree-p topmod modalist)))
+        (mv
+         (msg "Module ~s0 has an instance loop!~%" topmod)
+         nil nil nil moddb aliases))
+
+       ;; Create a moddb structure from the module hierarchy.
+       ;; This involves enumerating the modules, instances, and wires.
+       (moddb (cwtime (module->db topmod modalist moddb)))
+       (modidx (moddb-modname-get-index topmod moddb))
+
+       ;; Clear and size the aliases
+       ((stobj-get totalwires)
+        ((elab-mod (moddb->modsi modidx moddb)))
+        (elab-mod->totalwires elab-mod))
+       ;; (- (cw "Total wires: ~x0~%" totalwires))
+       (aliases (resize-lhss 0 aliases))
+       (aliases (resize-lhss totalwires aliases))
+
+       ;; ((unless modidx)
+       ;;  (raise "Module ~s0 not in database after translation~%" topmod)
+       ;;  (mv nil nil modalist good bad moddb aliases))
+
+       ;; Now translate the modalist by replacing all variables (nets/HIDs)
+       ;; with their moddb indices.
+       ((mv err indexed-modalist) (cwtime (modalist-named->indexed modalist moddb :quiet t)))
+       ((when err)
+        (mv (msg "Error indexing wire names: ~@0~%" err)
+            nil nil nil moddb aliases))
+
+       ((with-fast indexed-modalist))
+
+       (scope (make-modscope-top :modidx modidx))
+
+       ;; Gather the full flattened lists of aliases and assignments from the module DB.
+       ((mv modfails varfails flat-aliases flat-assigns)
+        (cwtime (svex-mod->flatten scope indexed-modalist moddb)))
+       ((when modfails)
+        (mv (msg "Module names referenced but not found: ~x0~%" modfails)
+            nil nil nil moddb aliases))
+       ((when varfails)
+        (mv (msg "Variable names malformed/unresolved: ~x0~%" varfails)
+            nil nil nil moddb aliases))
+
+       ;; Compute a normal form for each variable by running a
+       ;; union/find-like algorithm on the list of alias pairs.  This
+       ;; populates aliases, which maps each wire's index to its canonical form.
+       (aliases (cwtime (svex-mod->initial-aliases modidx 0 moddb aliases)))
+       (aliases (cwtime (canonicalize-alias-pairs flat-aliases aliases))))
+    (mv nil indexed-modalist flat-aliases flat-assigns moddb aliases))
+  ///
+
+  (verify-guards svex-design-flatten-modified-fn))
+
+(define check-design-flatten
+  ((x design-p))
+  :guard (svarlist-addr-p (modalist-vars (design->modalist x)))
+  (b* (((acl2::local-stobjs moddb aliases)
+        (mv indexed-modalist flat-aliases flat-assigns aliases-list moddb aliases))
+       ((mv err indexed-modalist flat-aliases flat-assigns moddb aliases)
+        (svex-design-flatten-modified x))
+       ((when err) (raise "Error flattening design: ~@0" err)
+        (mv nil nil nil nil moddb aliases))
+       (aliases-list (collect-aliases 0 aliases)))
+    (mv indexed-modalist flat-aliases flat-assigns aliases-list moddb aliases)))
+
+(rule
+ (mv-let
+   (indexed-modalist flat-aliases flat-assigns aliases-list)
+   (check-design-flatten *$DESIGN$*)
+   (and
+    (equal indexed-modalist *$DESIGN$-indexed*)
+    (equal flat-aliases     *$DESIGN$-flat-aliases*)
+    (equal flat-assigns     *$DESIGN$-flat-assigns*)
+    (equal aliases-list     *$DESIGN$-aliases-list*))))

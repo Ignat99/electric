@@ -1,0 +1,53 @@
+<!-- NEED 5in -->
+
+<!-- HEADER 1-4-4: Netbeans Access to the savannah.gnu.org Repository -->
+
+<ol>
+<li>Start NetBeans 7.0 or later (these instructions do not work with earlier versions).</li>
+<li>Install the Team Server Plugin (may be done already with some NetBeans installations):
+    <ul>
+    <li>Use <b>Tools / Plugins</b> and choose the "Available Plugins" tab in the Plugins manager.</li>
+    <li>In the left pane, check the "Team Server" plugin and click "Install".
+If it is not listed, then it may already be installed.</li>
+    <li>Use <b>Window / Services</b> to open the "Services" tab</li>
+    <li>Expand the "Team Server" node and check that the "savannah.gnu.org" Team Server is listed.</li>
+    </ul></li>
+<li>Download Electric Sources from savannah.gnu.org .
+    <ul>
+    <li>Use <b>Team / Team Server / savannah.gnu.org</b> and click <b>Open Project</b></li>
+    <li>Search for "electric", select "Electric: VLSI Design System", and click "Open From Team Server"</li>
+    <li>Expand the "Electric: VLSI Design System" node in the "Team" tab and the "Sources" subnode</li>
+    <li>Click "Source Code Repository (get)"</li>
+    <li>Either enter "Folder To Get" or click the "Browse..." button and choose "trunk" .</li>
+    <li>Choose "Local Folder" and select the location for Electric Sources.
+	The default is "~/NetBeansProjects/electric~svn"</li>
+    <li>Click "Get From Team Server"</li>
+    <li>When done, the "Checkout Completed" dialog will say that projects were checked-out. Click "Open Project...", choose "electric", and click "Open".</li>
+    </ul></li>
+<li>Build Electric
+    <ul>
+    <li>Click <b>Run / Set Project Configuration / release-profile</b>.
+    <li>In the "Projects" tab, right-click "electric" and choose "Build".
+	The Electric project is large. If the build hangs, then it may be necessary to add
+	"-J-Xmx2g" to the netbeans_default_options in file &lt;NETBEANS_INSTALLATION&gt;/etc/netbeans.conf .</li>
+    </ul></li>
+<li>Run Electric.
+    <ul>
+    <li>Use either <b>Run / Run Main Project (electric)</b> or <b>Debug / Debug Main Project (electric)</b> from the main menu.</li>
+    </ul></li>
+<li>Create a shortcut to start Electric from Desktop:
+    <ul>
+    <li>Create a shortcut to "~/NetBeansProjects/electric~svn/electric/dist/electric.jar" in Unix
+        or to "Local Folder\Documents\NetBeansProjects\electric~svn\trunk\electric\target\electric-V.VV-n-SNAPSHOT-jar-with-dependencies.jar" in Windows</li>
+    <li>Edit shortcut's "OpenWith" to OpenJDK or other Java distribution.
+        Make this shortcut executable.</li>
+    <li>Launch Electric with this shortcut.</li>
+    </ul></li>
+<li>Create electric distribution for your organization (optional).
+    <ul>
+    <li>Copy the folder ~/NetBeansProjects/electric~svn/electric/dist (with subdirectories) to a shared location
+        in your file system.</li>
+    </ul></li>
+</ol>
+
+<!-- TRAILER -->

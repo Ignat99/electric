@@ -1,0 +1,89 @@
+<!-- HEADER 1-4-2: Source Code in the JAR Files -->
+
+Two Electric downloads are available from the Free Software Foundation (GNU): with and without source code.
+Therefore it is possible to build Electric from the source code in the download.
+Note, however, that this is not the preferred way to access the source code because it does not
+include the various dependencies.
+The preferred way to access the source code is to use Subversions and to access the code on savannah.gnu.org
+(see the next three sections for more).
+<P>
+To extract the source code from the ".jar" file, place it in its own directory,
+change to that directory, and run the following command:
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;<CODE><FONT SIZE="-1">jar xf electric-<I>version</I>.jar</FONT></CODE>
+<BR>
+(Windows users may want to install "cygwin," from <A HREF="http://www.cygwin.com">www.cygwin.com</A>,
+in order to more easily run "jar" and other commands.)
+The "jar" command will create a number of files and folders on your disk:
+<UL>
+<LI><B>com</B> is a folder with all of the source code.</LI>
+<LI><B>org</B> and <B>scala</B> are folders with additional source code that isn't needed when rebuilding.</LI>
+<LI><B>META-INF</B> is a support folder used when running the ".jar" file and can be deleted.</LI>
+<LI><B>ChangeLog.txt</B> is a detailed list of changes to Electric.</LI>
+<LI><B>COPYING.txt</B> is the GNU copyright document that applies to your use of Electric.</LI>
+<LI><B>README.txt</B> is a file of notes about Electric.</LI>
+</UL>
+<P>
+The next step is to get a version of Java that can build source code.
+Although a "JRE" (Java Runtime Environment) is sufficient for running Electric,
+it is not able to build the source code.
+For that, you must have a "JDK" (Java Development Kit).
+In addition, you may want to use an IDE (Integrated Development Environment) such as
+NetBeans (at <A HREF="http://www.netbeans.org">www.netbeans.org</A>) or
+Eclipse (at <A HREF="http://www.eclipse.org">www.eclipse.org</A>).
+<P>
+<H4>Using the Command Line</H4>
+<P>
+"Ant" is a scripting system for building Java programs,
+and Electric comes with an Ant script called "build.xml".
+Once the source code is extracted, you can rebuild Electric simply by typing "ant".
+Before you do that, there are some considerations:
+<ul>
+<li>If you are not on a Macintosh, you must obtain the Apple Java Extensions
+from <a href="developer.apple.com/samplecode/AppleJavaExtensions">developer.apple.com/samplecode/AppleJavaExtensions</a> and place it
+in the directory (next to the "build.xml" file).</li>
+<li>The build script only builds what is on your disk.
+If you want to include the Static Free Software extensions, you must
+download it and extract it before building.</li>
+<li>The build script does not include the parts of Electric that are coded in Scala (insignificant).</li>
+<li>The build script does not build the Bean Shell or Jython.</li>
+</ul>
+<P>
+<!-- NEED 3in -->
+<H4>Running under Eclipse</H4>
+<P>
+Here are some notes about building Electric under Eclipse:
+<UL>
+<LI><B>Setup Workspace.</B>  The Workspace is a point in the file system where all source code can be found.
+You can use the directory where you extracted the Electric source code, or any point above that.</LI>
+<LI><B>Create Project.</B> The Project defines a single program that is being built.
+Use <B>File / New / Project</B> and choose "Java Project from Existing Ant Buildfile".
+Choose the "build.xml" file in the folder where the files were extracted.
+Give the project a name, for example, "Electric."</LI>
+<LI><B>Configure Libraries.</B> The "Libraries" tab of the Eclipse project settings lets you add other packages that may be relevant to the build.
+There are no required libraries, but many optional ones
+(see <A HREF="chap01-05.html#chap01-05">Section 1-5</A> on plug-ins).
+Use the "Add External JARs" button to add any extra libraries.</LI>
+<LI><B>Handle Macintosh variations.</B>
+If you are building on a Macintosh, no changes are needed.
+If you are not building on a Macintosh, you must decide whether or not you want the code that you produce to
+also run on a Macintosh.
+If you do not care about being able to run on a Macintosh, remove the source code module
+"com.sun.electric.tool.user.MacOSXInterface.java" (which probably has a red "X" next to it indicating that there
+are errors in the file).
+If you want the final code to be able to run on all platforms,
+download the stub package "AppleJavaExtensions.jar" from
+<A HREF="http://developer.apple.com/samplecode/AppleJavaExtensions">
+developer.apple.com/samplecode/AppleJavaExtensions</A>
+and add this as an external JAR file.</LI>
+<LI><B>Run Electric.</B> Use the <B>Run...</B> command (under the <B>Run</B> menu)
+to create a run configuration.
+Under the "Main" tab of the run-configuration dialog,
+give the configuration a name (for example, "Electric"),
+set the Project to match the one that you have created,
+and set the "Main class" to be "com.sun.electric.Launcher".
+Under the "Arguments" section of the dialog,
+it is a good idea to increase Electric's memory size by entering "-mx1000m" under "VM arguments".</LI>
+</UL>
+
+<!-- TRAILER -->

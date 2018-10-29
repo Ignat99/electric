@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * Electric(tm) VLSI Design System
+ *
+ * File: fpgaMenu.xml
+ * fpga technology menu description
+ * Generated automatically from a library
+ *
+ * Copyright (c) 2009, Static Free Software. All rights reserved.
+ *
+ * Electric(tm) is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Electric(tm) is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+-->
+
+    <menuPalette numColumns="1">
+
+        <menuBox>
+            <menuArc>wire</menuArc>
+        </menuBox>
+
+        <menuBox>
+            <menuText>Cell</menuText>
+        </menuBox>
+
+        <menuBox>
+            <menuText>Misc.</menuText>
+        </menuBox>
+
+        <menuBox>
+            <menuText>Pure</menuText>
+        </menuBox>
+
+        <menuBox>
+            <menuNodeInst protoName="Wire_Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuNode>Pip</menuNode>
+        </menuBox>
+
+        <menuBox>
+            <menuNode>Repeater</menuNode>
+        </menuBox>
+
+    </menuPalette>

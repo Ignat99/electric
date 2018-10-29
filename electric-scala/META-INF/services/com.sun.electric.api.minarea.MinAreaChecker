@@ -1,0 +1,4 @@
+com.sun.electric.plugins.minarea.bitmapjava.BitMapMinAreaChecker
+com.sun.electric.plugins.minarea.bitmapscala.BitMapMinAreaChecker
+com.sun.electric.plugins.minarea.deltamerge0.SimpleChecker
+com.sun.electric.plugins.minarea.deltamerge1.SimpleChecker

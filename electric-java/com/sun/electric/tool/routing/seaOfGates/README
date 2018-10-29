@@ -1,0 +1,8 @@
+SeaOfGatesEngineOld:
+- old version with raw native java threads
+- just refactored for the integration of the new versions
+
+SeaOfGatesEngineNew:
+- two thread pools
+* 1 for parallel routes
+* 1 for the parallel dijkstra

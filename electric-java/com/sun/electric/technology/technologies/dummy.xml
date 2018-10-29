@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * Electric(tm) VLSI Design System
+ *
+ * File: dummy.xml
+ * dummy technology description
+ *
+ * Copyright (c) 2008, Static Free Software. All rights reserved.
+ *
+ * Electric(tm) is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Electric(tm) is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+-->
+
+<technology name="dummy" class="com.sun.electric.technology.technologies.Dummy"
+     xmlns="http://electric.sun.com/Technology"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://electric.sun.com/Technology ../../technology/Technology.xsd">
+
+    <shortName>Dummy</shortName>
+    <description>Dummy</description>
+    <numMetals min="1" max="1" default="1"/>
+    <scale value="200.0" relevant="true"/>
+    <resolution value="0.01"/> <!-- value in lambda -->
+    <defaultFoundry value="MOSIS"/>
+    <minResistance value="4.0"/>
+    <minCapacitance value="0.1"/>
+
+    <!-- Transparent layers -->
+
+    <!-- **************************************** LAYERS **************************************** -->
+    <layer name="Metal-1" fun="METAL1">
+        <opaqueColor r="150" g="150" b="255"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>true</patternedOnPrinter>
+        <pattern>  X   X   X   X </pattern>
+        <pattern>                </pattern>
+        <pattern>X   X   X   X   </pattern>
+        <pattern>                </pattern>
+        <pattern>  X   X   X   X </pattern>
+        <pattern>                </pattern>
+        <pattern>X   X   X   X   </pattern>
+        <pattern>                </pattern>
+        <pattern>  X   X   X   X </pattern>
+        <pattern>                </pattern>
+        <pattern>X   X   X   X   </pattern>
+        <pattern>                </pattern>
+        <pattern>  X   X   X   X </pattern>
+        <pattern>                </pattern>
+        <pattern>X   X   X   X   </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="2.65" height="16.5" mode="NONE" factor="0.2"/>
+        <cifLayer cif="CMF"/>
+        <skillLayer skill="metal1"/>
+        <parasitics resistance="0.078" capacitance="0.1209" edgeCapacitance="0.1104"/>
+        <pureLayerNode name="Metal-1-Node" port="metal-1">
+            <lambda>3.0</lambda>
+            <portArc>Metal-1</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <!-- ******************** ARCS ******************** -->
+    <arcProto name="Metal-1" fun="METAL1">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>90</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <diskOffset untilVersion="2" width="1.5"/>
+        <arcLayer layer="Metal-1" style="FILLED">
+            <lambda>1.5</lambda>
+        </arcLayer>
+    </arcProto>
+
+    <!-- ******************** NODES ******************** -->
+    <primitiveNode name="Metal-1-Pin" fun="PIN">
+        <shrinkArcs/>
+        <diskOffset untilVersion="2" x="1.5" y="1.5"/>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="-1.5" khx="1.5" kly="-1.5" khy="1.5"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Metal-1" style="CROSSED">
+            <box>
+                <lambdaBox klx="-1.5" khx="1.5" kly="-1.5" khy="1.5"/>
+            </box>
+        </nodeLayer>
+        <primitivePort name="metal-1">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Metal-1</portArc>
+        </primitivePort>
+    </primitiveNode>
+    
+     <!--primitiveNode name="BigBlueBox" fun="UNKNOWN">
+         <nodeBase>
+             <box>
+             <lambdaBox klx="0" khx="0" kly="0" khy="0"/>
+             </box>
+         </nodeBase>
+         <nodeLayer layer="Metal-1" style="FILLED">
+             <box>
+                 <lambdaBox klx="0" khx="0" kly="0" khy="0"/>
+             </box>
+         </nodeLayer>
+         <primitivePort name="p">
+             <portAngle primary="0" range="90"/>
+             <portTopology>0</portTopology>
+             <box>
+                 <lambdaBox klx="0" khx="0" kly="0" khy="0"/>
+             </box>
+             <portArc>Metal-1</portArc>
+         </primitivePort>
+     </primitiveNode-->
+    
+    <Foundry name="MOSIS"/>
+</technology>

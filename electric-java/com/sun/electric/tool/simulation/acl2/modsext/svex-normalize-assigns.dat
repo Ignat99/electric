@@ -1,0 +1,174 @@
+(in-package "SV")
+
+(include-book "std/util/defconsts" :dir :system)
+(include-book "std/util/defrule" :dir :system)
+(include-book "centaur/sv/mods/compile" :dir :system)
+
+(local (include-book "std/basic/arith-equivs" :dir :system))
+(local (include-book "std/lists/resize-list" :dir :system))
+(local (include-book "std/lists/take" :dir :system))
+(local (include-book "std/osets/under-set-equiv" :dir :system))
+(local (in-theory (disable nfix natp)))
+
+(defconsts (*$DESIGN$* state)
+  (serialize-read "$DESIGN$.sao"))
+
+(defconsts (*$DESIGN$-results* state)
+  (serialize-read "$DESIGN$-svex-normalize-assigns.sao"))
+
+(defconst *$DESIGN$-indexed-assigns*      (nth 0 *$DESIGN$-results*))
+(defconst *$DESIGN$-indexed-aliases-list* (nth 1 *$DESIGN$-results*))
+(defconst *$DESIGN$-named-aliases-list*   (nth 2 *$DESIGN$-results*))
+(defconst *$DESIGN$-svexarr-list*         (nth 3 *$DESIGN$-results*))
+(defconst *$DESIGN$-norm-assigns*         (nth 4 *$DESIGN$-results*))
+(defconst *$DESIGN$-net-assigns*          (nth 5 *$DESIGN$-results*))
+(defconst *$DESIGN$-flat-assigns*         (nth 6 *$DESIGN$-results*))
+(defconst *$DESIGN$-flat-delays*          (nth 7 *$DESIGN$-results*))
+
+(local
+ (defrule lhlist-collect-aliases
+   (lhslist-p (collect-aliases n aliases))
+   :enable collect-aliases))
+
+(define collect-svexarr ((n natp) svexarr)
+  ;; for debugging, mostly
+  :guard (<= n (svexs-length svexarr))
+  :measure (nfix (- (svexs-length svexarr) (nfix n)))
+  :returns (svexlst svexlist-p)
+  (b* (((when (mbe :logic (zp (- (svexs-length svexarr) (nfix n)))
+                   :exec (eql n (svexs-length svexarr))))
+        nil))
+    (cons (get-svex n svexarr)
+          (collect-svexarr (1+ (lnfix n)) svexarr))))
+
+(define svex-normalize-assigns-modified ((assigns assigns-p)
+                                (aliases))
+  :guard (and ;; (svarlist-boundedp (svar-map-vars delays) (aliass-length aliases))
+              (svarlist-boundedp (assigns-vars assigns) (aliass-length aliases))
+              ;; (svarlist-addr-p (aliases-vars aliases))
+              )
+  :verify-guards nil
+  :returns (mv (svexarr-list svexlist-p)
+               (norm-assigns assigns-p)
+               (net-assigns netassigns-p)
+               (res-assigns svex-alist-p)
+               (res-delays svar-map-p))
+  :prepwork ()
+  (b* (
+       ;; The alias table contains LHSes, which are a different data
+       ;; structure than SVEXes but can be translated to them.  We populate
+       ;; svexarr with the direct translations of the canonical aliases.
+       ((acl2::local-stobjs svexarr)
+        (mv svexarr-list norm-assigns net-assigns res-assigns res-delays svexarr))
+       (svexarr (resize-svexs (aliass-length aliases) svexarr))
+       (svexarr (cwtime (lhsarr-to-svexarr 0 aliases svexarr)))
+       (svexarr-list (collect-svexarr 0 svexarr))
+
+
+       ;; Canonicalize the assigns list by substituting variables for their canonical forms.
+       (norm-assigns (cwtime (assigns-subst assigns aliases svexarr)))
+       ;; (norm-delays  (cwtime (svar-map-subst delays aliases svexarr)))
+
+       ;; (- (sneaky-save 'norm-assigns norm-assigns))
+       ;; Translate, e.g.,
+       ;; assign { a[5:3], b[4:1] } = c
+       ;; to:
+       ;; assign a = { z, c[6:4], 3'bz }
+       ;; assign b = { z, c[3:0], 1'bz }
+       ;; that is, simplify the assignments so that we have only assignments to whole wires.
+       (net-assigns (cwtime (assigns->netassigns norm-assigns)))
+       ;; (net-delays (cwtime (assigns->netassigns norm-delays)))
+
+       ;; (- (sneaky-save 'net-assigns net-assigns))
+
+       ;; Resolve together multiple assignments to the same wire.
+       (res-assigns (cwtime (netassigns->resolves net-assigns)))
+
+       ;; Collect all variables referenced and add delays as needed.
+       (delayvars (svarlist-collect-delays (svexlist-collect-vars (svex-alist-vals res-assigns))))
+       (res-delays (delay-svarlist->delays delayvars)))
+    (mv svexarr-list norm-assigns net-assigns res-assigns res-delays svexarr))
+  ///
+  (deffixequiv svex-normalize-assigns-modified)
+
+  (defthm svexlist-vars-of-svex-alist-vals
+    (equal (svexlist-vars (svex-alist-vals x))
+           (svex-alist-vars x))
+    :hints(("Goal" :in-theory (enable svex-alist-vals svex-alist-vars svexlist-vars))))
+
+  (verify-guards svex-normalize-assigns-modified
+    :guard-debug t
+    :hints (("goal" :do-not-induct t
+             :in-theory (disable member-equal)))))
+
+(define svex-design-flatten-and-normalize-modified ((x design-p)
+                                           &key
+                                           (indexedp 'nil)
+                                           ((moddb "overwritten") 'moddb)
+                                           ((aliases "overwritten") 'aliases))
+
+  :parents (svex-compilation)
+  :short "Flatten a hierarchical SV design and apply alias normalization to it."
+  :long "<p>This does all of the steps of @(see svex-design-compile) except for
+         the final composition of local assignments into global 0-delay update
+         functions.</p>"
+  :returns (mv err
+               (indexed-assigns assigns-p)
+               (indexed-aliases-list lhslist-p)
+               (svexarr-list svexlist-p)
+               (norm-assigns assigns-p)
+               (net-assigns netassigns-p)
+               (flat-assigns svex-alist-p)
+               (flat-delays svar-map-p)
+               (moddb (and (moddb-basics-ok moddb)
+                           (moddb-mods-ok moddb)))
+               (aliases))
+  :guard (modalist-addr-p (design->modalist x))
+  :verify-guards nil
+  (b* (((mv err assigns moddb aliases)
+        (svex-design-flatten x))
+       ((when err)
+        (mv err nil nil nil nil nil nil nil moddb aliases))
+       (modidx (moddb-modname-get-index (design->top x) moddb))
+       (indexed-aliases-list (collect-aliases 0 aliases))
+       (aliases (if indexedp
+                    aliases
+                  (cwtime (aliases-indexed->named aliases
+                                                  (make-modscope-top :modidx modidx)
+                                                  moddb)
+                          :mintime 1)))
+       ((mv svexarr-list norm-assigns net-assigns res-assigns res-delays)
+        (svex-normalize-assigns-modified assigns aliases)))
+    (mv nil assigns indexed-aliases-list svexarr-list norm-assigns net-assigns res-assigns res-delays moddb aliases))
+  ///
+  (verify-guards svex-design-flatten-and-normalize-modified-fn
+    :hints(("Goal" :in-theory (enable modscope-okp
+                                      modscope->modidx
+                                      modscope-local-bound)))))
+
+
+(define check-design-flatten-and-normalize
+  ((x design-p))
+  :guard (svarlist-addr-p (modalist-vars (design->modalist x)))
+  (b* (((acl2::local-stobjs moddb aliases)
+        (mv index-assigns indexed-aliases-list named-aliases-list svexarr-list norm-assigns net-assigns flat-aliases flat-assigns moddb aliases))
+       ((mv err indexed-assigns indexed-aliases-list svexarr-list norm-assigns net-assigns flat-assigns flat-delays moddb aliases)
+        (svex-design-flatten-and-normalize-modified x :indexedp $INDEXED$))
+       ((when err) (raise "Error flattening design: ~@0" err)
+        (mv nil nil nil nil nil nil nil nil moddb aliases))
+       (named-aliases-list (collect-aliases 0 aliases)))
+    (mv indexed-assigns indexed-aliases-list named-aliases-list svexarr-list norm-assigns net-assigns flat-assigns flat-delays moddb aliases)))
+
+(rule
+ (mv-let
+   (indexed-assigns indexed-aliases-list named-aliases-list svexarr-list norm-assigns net-assigns flat-assigns flat-delays)
+   (check-design-flatten-and-normalize *$DESIGN$*)
+   (and
+    (equal indexed-assigns      *$DESIGN$-indexed-assigns*)
+    (equal indexed-aliases-list *$DESIGN$-indexed-aliases-list*)
+    (equal named-aliases-list   *$DESIGN$-named-aliases-list*)
+    (equal svexarr-list         *$DESIGN$-svexarr-list*)
+    (equal norm-assigns         *$DESIGN$-norm-assigns*)
+    (equal net-assigns          *$DESIGN$-net-assigns*)
+    (equal flat-assigns         *$DESIGN$-flat-assigns*)
+    (equal flat-delays          *$DESIGN$-flat-delays*))))

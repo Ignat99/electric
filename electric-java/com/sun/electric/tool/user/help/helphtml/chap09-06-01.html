@@ -1,0 +1,94 @@
+<!-- HEADER 9-6-1: Introduction to Routing -->
+
+<!-- COMMAND Tools/Routing/Unroute Network -->
+<!-- COMMAND Tools/Routing/Unroute Segment -->
+<!-- COMMAND Tools/Routing/Get Unrouted Wire -->
+<!-- COMMAND Tools/Routing/Copy Routing Topology -->
+<!-- COMMAND Tools/Routing/Paste Routing Topology -->
+<!-- COMMAND Tools/Routing/Experimental Routers/A* - 1 -->
+<!-- COMMAND Tools/Routing/Experimental Routers/A* - 2 -->
+<!-- COMMAND Tools/Routing/Experimental Routers/A* - 3 -->
+<!-- COMMAND Tools/Routing/Experimental Routers/Lee/Moore - 1 -->
+<!-- COMMAND Tools/Routing/Experimental Routers/Lee/Moore - 2 -->
+<!-- COMMAND Tools/Routing/Experimental Routers/Lee/Moore - 3 -->
+<!-- PREFERENCE Tools/Routing -->
+
+The routing tool contains a number of different subsystems for creating wires.
+Two <I>stitching</I> routers can be used in array-based design to connect adjoining cells.
+A maze-router runs individual wires.
+A river-router is available for running multiple parallel wires.
+The sea-of-gates router handles many wires in arbitrary connection situations.
+The clock-router builds balanced trees that guarantee constant-length paths to each destination cell.
+Finally, there are six experimental routers, based on the A* and the Lee/Moore algorithms.
+<P>
+
+<H4>Unrouted Arcs</H4>
+
+<TABLE><TR><TD>
+All of the non-stitching routers make use of the "Unrouted Arc",
+a thin-line arc that can connect any two components.
+Creating "rats nests" of these arcs forms a graphical specification that the router can use.
+The unrouted arc is from the Generic Technology
+(see <A HREF="chap07-06-03.html#chap07-06-03">Section 7-6-3</A>).
+To create one, use the <B>Get Unrouted Wire</B> command (in menu <B>Tools / Routing</B>).
+</TD><TD><CENTER><IMG SRC="fig09-63.png" ALT="Figure 9.63"></CENTER></TD></TR></TABLE>
+<P>
+Then use standard wiring commands to run the unrouted arc.
+Another way to get unrouted wires is to select all or part of an existing route
+(made with any arc) and use the <B>Unroute Network</B> or <B>Unroute Segment</B> commands.
+<B>Unroute Network</B> replaces all arcs on the selected network whereas <B>Unroute Segment</B>
+only removes the selected segment of the network that runs between termination or forking points.
+<P>
+Another way to get Unrouted arcs for router input is to use the
+<B>Copy Routing Topology</B> and <B>Paste Routing Topology</B> commands.
+These copy the network topology from one cell (the "copied" cell) to another cell (the "pasted" cell).
+The copied cell should be properly routed.
+The <B>Paste Routing Topology</B> command uses node and arc names to associate the two cells.
+<P>
+
+<H4>Routing Exclusion</H4>
+
+You can tell routers to avoid certain layers in specified areas by placing a "Routing Exclusion" node in those areas.
+This exclusion layer is created by clicking the "Misc." entry of the component menu and selecting "Routing Exclusion"
+(see <A HREF="chap07-06-03.html#chap07-06-03">Section 7-6-3</A>).
+When first placed, you are prompted for a list of metal layers that are not allowed to run underneath it.
+This list can be a single number ("2" to exclude Metal-2),
+a comma-separated list ("4,6" to exclude Metals 4 and 6),
+or a range ("3-5" to exclude Metals 3, 4, and 5).
+You can also use "ALL" to exclude all layers under this node.
+<P>
+Currently, only the Sea-of-Gates router handles routing exclusion
+(see <A HREF="chap09-06-06.html#chap09-06-06">Section 9-6-6</A>).
+<P>
+
+<H4>Routing Mode</H4>
+
+When a circuit has been correctly placed, and the unrouted arcs are connected,
+all that remains is the routing.
+During this phase, it is important that the circuit not change.
+To ensure this, check "Routing mode (cannot change connectivity)" (in menu <b>File / Preferences...</b>, "General" section, "Selection" tab).
+While in Routing Mode, you can select only arcs (not nodes) and you cannot make changes to the circuit.
+
+<P>
+
+<!-- NEED 5in -->
+<H4>Preferences</H4>
+
+The Routing Preferences (in menu <B>File / Preferences...</B>, "Tools" section, "Routing" tab)
+controls all of the different routers.
+The section in the upper-left applies to the two stitching routers (Mimic and Auto).
+Specific sections apply to specific routers
+(see <A HREF="chap09-06-03.html#chap09-06-03">Section 9-6-3</A> for the Mimic Stitcher,
+<A HREF="chap09-06-02.html#chap09-06-02">Section 9-6-2</A> for the Auto Stitcher, and
+<A HREF="chap09-06-06.html#chap09-06-06">Section 9-6-6</A> for the Sea-of-Gates router).
+<P>
+<CENTER><IMG SRC="fig09-05.png" ALT="Figure 9.5"></CENTER>
+<P>
+
+<H4>Experimental Routers</H4>
+
+Six experimental routers are available under the <B>Experimental Routers</B> submenu.
+Three of them are based on the A* algorithm and three are based on the Lee/Moore algorithm.
+In each case, the first one is the most stable.
+
+<!-- TRAILER -->

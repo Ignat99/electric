@@ -1,0 +1,1831 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * Electric(tm) VLSI Design System
+ *
+ * File: pcb.xml
+ * Printed-Circuit Board technology description
+ * Generated automatically from a library
+ *
+ * Copyright (c) 2004, Static Free Software. All rights reserved.
+ *
+ * Electric(tm) is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Electric(tm) is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+-->
+
+<technology name="pcb"
+     xmlns="http://electric.sun.com/Technology"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://electric.sun.com/Technology ../../technology/Technology.xsd">
+
+    <description>Printed Circuit Board (eight-layer)</description>
+    <version tech="1" electric="8.05g"/>
+    <version tech="2" electric="8.05o"/>
+    <numMetals min="8" max="8" default="8"/>
+    <scale value="1270000.0" relevant="true"/>
+    <resolution value="0.0"/>
+    <defaultFoundry value="NONE"/>
+    <minResistance value="10.0"/>
+    <minCapacitance value="0.0"/>
+
+    <!-- Transparent layers -->
+    <transparentLayer transparent="1">
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+    </transparentLayer>
+    <transparentLayer transparent="2">
+        <r>255</r>
+        <g>0</g>
+        <b>0</b>
+    </transparentLayer>
+    <transparentLayer transparent="3">
+        <r>0</r>
+        <g>255</g>
+        <b>0</b>
+    </transparentLayer>
+    <transparentLayer transparent="4">
+        <r>0</r>
+        <g>0</g>
+        <b>255</b>
+    </transparentLayer>
+    <transparentLayer transparent="5">
+        <r>255</r>
+        <g>255</g>
+        <b>0</b>
+    </transparentLayer>
+
+    <!-- **************************************** LAYERS **************************************** -->
+    <layer name="Signal1" fun="METAL1">
+        <transparentColor transparent="1"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PC1"/>
+        <pureLayerNode name="Signal-1-Node" port="signal-1">
+            <lambda>1.25</lambda>
+            <portArc>Signal-1</portArc>
+            <portArc>Power-1</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Signal2" fun="METAL2">
+        <transparentColor transparent="2"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PC2"/>
+        <pureLayerNode name="Signal-2-Node" port="signal-2">
+            <lambda>1.25</lambda>
+            <portArc>Signal-2</portArc>
+            <portArc>Power-2</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Signal3" fun="METAL3">
+        <transparentColor transparent="3"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PC3"/>
+        <pureLayerNode name="Signal-3-Node" port="signal-3">
+            <lambda>1.25</lambda>
+            <portArc>Signal-3</portArc>
+            <portArc>Power-3</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Signal4" fun="METAL4">
+        <transparentColor transparent="4"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PC4"/>
+        <pureLayerNode name="Signal-4-Node" port="signal-4">
+            <lambda>1.25</lambda>
+            <portArc>Signal-4</portArc>
+            <portArc>Power-4</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Signal5" fun="METAL5">
+        <transparentColor transparent="5"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PC5"/>
+        <pureLayerNode name="Signal-5-Node" port="signal-5">
+            <lambda>1.25</lambda>
+            <portArc>Signal-5</portArc>
+            <portArc>Power-5</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Signal6" fun="METAL6">
+        <opaqueColor r="255" g="255" b="0"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PC6"/>
+        <pureLayerNode name="Signal-6-Node" port="signal-6">
+            <lambda>1.25</lambda>
+            <portArc>Signal-6</portArc>
+            <portArc>Power-6</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Signal7" fun="METAL7">
+        <opaqueColor r="255" g="190" b="6"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PC7"/>
+        <pureLayerNode name="Signal-7-Node" port="signal-7">
+            <lambda>1.25</lambda>
+            <portArc>Signal-7</portArc>
+            <portArc>Power-7</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Signal8" fun="METAL8">
+        <opaqueColor r="0" g="255" b="255"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PC8"/>
+        <pureLayerNode name="Signal-8-Node" port="signal-8">
+            <lambda>1.25</lambda>
+            <portArc>Signal-8</portArc>
+            <portArc>Power-8</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Power1" fun="METAL1">
+        <transparentColor transparent="1"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PN1"/>
+        <pureLayerNode name="Power-1-Node" port="power-1">
+            <lambda>1.25</lambda>
+            <portArc>Signal-1</portArc>
+            <portArc>Power-1</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Power2" fun="METAL2">
+        <transparentColor transparent="2"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PN2"/>
+        <pureLayerNode name="Power-2-Node" port="power-2">
+            <lambda>1.25</lambda>
+            <portArc>Signal-2</portArc>
+            <portArc>Power-2</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Power3" fun="METAL3">
+        <transparentColor transparent="3"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PN3"/>
+        <pureLayerNode name="Power-3-Node" port="power-3">
+            <lambda>1.25</lambda>
+            <portArc>Signal-3</portArc>
+            <portArc>Power-3</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Power4" fun="METAL4">
+        <transparentColor transparent="4"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PN4"/>
+        <pureLayerNode name="Power-4-Node" port="power-4">
+            <lambda>1.25</lambda>
+            <portArc>Signal-4</portArc>
+            <portArc>Power-4</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Power5" fun="METAL5">
+        <transparentColor transparent="5"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PN5"/>
+        <pureLayerNode name="Power-5-Node" port="power-5">
+            <lambda>1.25</lambda>
+            <portArc>Signal-5</portArc>
+            <portArc>Power-5</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Power6" fun="METAL6">
+        <opaqueColor r="255" g="255" b="0"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PN6"/>
+        <pureLayerNode name="Power-6-Node" port="power-6">
+            <lambda>1.25</lambda>
+            <portArc>Signal-6</portArc>
+            <portArc>Power-6</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Power7" fun="METAL7">
+        <opaqueColor r="255" g="190" b="6"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PN7"/>
+        <pureLayerNode name="Power-7-Node" port="power-7">
+            <lambda>1.25</lambda>
+            <portArc>Signal-7</portArc>
+            <portArc>Power-7</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Power8" fun="METAL8">
+        <opaqueColor r="0" g="255" b="255"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PN8"/>
+        <pureLayerNode name="Power-8-Node" port="power-8">
+            <lambda>1.25</lambda>
+            <portArc>Signal-8</portArc>
+            <portArc>Power-8</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="TopSilk" fun="ART">
+        <opaqueColor r="230" g="230" b="230"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PSSC"/>
+        <pureLayerNode name="Top-Silk-Node" port="top-silk">
+            <lambda>1.25</lambda>
+            <portArc>Top-Silk</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="BottomSilk" fun="ART">
+        <opaqueColor r="100" g="100" b="100"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PSSS"/>
+        <pureLayerNode name="Bottom-Silk-Node" port="bottom-silk">
+            <lambda>1.25</lambda>
+            <portArc>Bottom-Silk</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="TopSolder" fun="METAL1">
+        <opaqueColor r="175" g="255" b="175"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PSMC"/>
+        <pureLayerNode name="Top-Solder-Node" port="top-solder">
+            <lambda>1.25</lambda>
+            <portArc>Top-Solder</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="BottomSolder" fun="METAL8">
+        <opaqueColor r="89" g="159" b="85"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PSMS"/>
+        <pureLayerNode name="Bottom-Solder-Node" port="bottom-solder">
+            <lambda>1.25</lambda>
+            <portArc>Bottom-Solder</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <layer name="Drill" fun="CONTACT1" extraFun="connects-metal">
+        <opaqueColor r="2" g="15" b="159"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PD"/>
+    </layer>
+
+    <layer name="DrillNonPlated" fun="ART">
+        <opaqueColor r="150" g="150" b="255"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PDNP"/>
+    </layer>
+
+    <layer name="Drawing" fun="ART">
+        <opaqueColor r="255" g="150" b="150"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+        <cifLayer cif="PF"/>
+        <pureLayerNode name="Engineering-Drawing-Node" port="engineering">
+            <lambda>1.25</lambda>
+            <portArc>Drawing</portArc>
+        </pureLayerNode>
+    </layer>
+
+    <!-- ******************** ARCS ******************** -->
+    <arcProto name="Signal-1" fun="METAL1">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Signal1" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Signal-2" fun="METAL2">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Signal2" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Signal-3" fun="METAL3">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Signal3" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Signal-4" fun="METAL4">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Signal4" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Signal-5" fun="METAL5">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Signal5" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Signal-6" fun="METAL6">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Signal6" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Signal-7" fun="METAL7">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Signal7" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Signal-8" fun="METAL8">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Signal8" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Power-1" fun="METAL1">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Power1" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Power-2" fun="METAL2">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Power2" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Power-3" fun="METAL3">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Power3" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Power-4" fun="METAL4">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Power4" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Power-5" fun="METAL5">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Power5" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Power-6" fun="METAL6">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Power6" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Power-7" fun="METAL7">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Power7" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Power-8" fun="METAL8">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Power8" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Top-Silk" fun="NONELEC">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>200.0</antennaRatio>
+        <arcLayer layer="TopSilk" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Bottom-Silk" fun="NONELEC">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>200.0</antennaRatio>
+        <arcLayer layer="BottomSilk" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Top-Solder" fun="NONELEC">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>200.0</antennaRatio>
+        <arcLayer layer="TopSolder" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Bottom-Solder" fun="NONELEC">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>200.0</antennaRatio>
+        <arcLayer layer="BottomSolder" style="FILLED"/>
+    </arcProto>
+
+    <arcProto name="Drawing" fun="NONELEC">
+        <wipable/>
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>200.0</antennaRatio>
+        <arcLayer layer="Drawing" style="FILLED"/>
+    </arcProto>
+
+    <!-- ******************** NODES ******************** -->
+    <primitiveNode name="Signal-1-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Signal1" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="signal-1">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-1</portArc>
+            <portArc>Power-1</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Signal-2-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Signal2" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="signal-2">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-2</portArc>
+            <portArc>Power-2</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Signal-3-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Signal3" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="signal-3">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-3</portArc>
+            <portArc>Power-3</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Signal-4-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Signal4" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="signal-4">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-4</portArc>
+            <portArc>Power-4</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Signal-5-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Signal5" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="signal-5">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-5</portArc>
+            <portArc>Power-5</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Signal-6-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Signal6" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="signal-6">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-6</portArc>
+            <portArc>Power-6</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Signal-7-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Signal7" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="signal-7">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-7</portArc>
+            <portArc>Power-7</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Signal-8-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Signal8" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="signal-8">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-8</portArc>
+            <portArc>Power-8</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Power-1-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Power1" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="power-1">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-1</portArc>
+            <portArc>Power-1</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Power-2-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Power2" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="power-2">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-2</portArc>
+            <portArc>Power-2</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Power-3-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Power3" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="power-3">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-3</portArc>
+            <portArc>Power-3</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Power-4-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Power4" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="power-4">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-4</portArc>
+            <portArc>Power-4</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Power-5-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Power5" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="power-5">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-5</portArc>
+            <portArc>Power-5</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Power-6-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Power6" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="power-6">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-6</portArc>
+            <portArc>Power-6</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Power-7-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Power7" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="power-7">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-7</portArc>
+            <portArc>Power-7</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Power-8-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Power8" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="power-8">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-8</portArc>
+            <portArc>Power-8</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Top-Silk-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="TopSilk" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="top-silk">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Top-Silk</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Bottom-Silk-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="BottomSilk" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="bottom-silk">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Bottom-Silk</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Top-Solder-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="TopSolder" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="top-solder">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Top-Solder</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Bottom-Solder-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="BottomSolder" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="bottom-solder">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Bottom-Solder</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Drill-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Drill" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="drill">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Signal-1</portArc>
+            <portArc>Signal-2</portArc>
+            <portArc>Signal-3</portArc>
+            <portArc>Signal-4</portArc>
+            <portArc>Signal-5</portArc>
+            <portArc>Signal-6</portArc>
+            <portArc>Signal-7</portArc>
+            <portArc>Signal-8</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="NonPlated-Drill-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="DrillNonPlated" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="nondrill">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="Engineering-Drawing-Pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <defaultWidth>
+            <lambda>1.25</lambda>
+        </defaultWidth>
+        <defaultHeight>
+            <lambda>1.25</lambda>
+        </defaultHeight>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Drawing" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="engineering">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>Drawing</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <menuPalette numColumns="4">
+
+        <menuBox>
+            <menuArc>Signal-1</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuArc>Power-1</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Signal-1-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Power-1-Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuArc>Signal-2</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuArc>Power-2</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Signal-2-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Power-2-Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuArc>Signal-3</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuArc>Power-3</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Signal-3-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Power-3-Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuArc>Signal-4</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuArc>Power-4</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Signal-4-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Power-4-Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuArc>Signal-5</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuArc>Power-5</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Signal-5-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Power-5-Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuArc>Signal-6</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuArc>Power-6</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Signal-6-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Power-6-Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuArc>Signal-7</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuArc>Power-7</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Signal-7-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Power-7-Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuArc>Signal-8</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuArc>Power-8</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Signal-8-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Power-8-Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuArc>Top-Silk</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Top-Silk-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuArc>Bottom-Silk</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Bottom-Silk-Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuArc>Top-Solder</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Top-Solder-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuArc>Bottom-Solder</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Bottom-Solder-Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuArc>Drawing</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Drill-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="NonPlated-Drill-Pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNodeInst protoName="Engineering-Drawing-Pin" function="PIN"/>
+        </menuBox>
+
+        <menuBox>
+            <menuText>Pure</menuText>
+        </menuBox>
+        <menuBox>
+            <menuText>Misc.</menuText>
+        </menuBox>
+        <menuBox>
+            <menuText>Cell</menuText>
+        </menuBox>
+        <menuBox/>
+
+    </menuPalette>
+
+    <Foundry name="NONE"/>
+</technology>

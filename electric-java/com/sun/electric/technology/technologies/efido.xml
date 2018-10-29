@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * Electric(tm) VLSI Design System
+ *
+ * File: rcmos.xml
+ * Digital Filter technology technology description
+ * Generated automatically from a library
+ *
+ * Copyright (c) 2004, Static Free Software. All rights reserved.
+ *
+ * Electric(tm) is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Electric(tm) is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+-->
+
+<technology name="efido"
+     xmlns="http://electric.sun.com/Technology"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://electric.sun.com/Technology ../../technology/Technology.xsd">
+
+    <description>Digital Filters</description>
+    <version tech="1" electric="8.05g"/>
+    <version tech="2" electric="8.05o"/>
+    <numMetals min="0" max="0" default="0"/>
+    <scale value="10000.0" relevant="false"/>
+    <resolution value="0.0"/>
+    <defaultFoundry value="NONE"/>
+    <minResistance value="10.0"/>
+    <minCapacitance value="0.0"/>
+
+    <!-- Transparent layers -->
+    <transparentLayer transparent="1">
+        <r>255</r>
+        <g>0</g>
+        <b>0</b>
+    </transparentLayer>
+    <transparentLayer transparent="2">
+        <r>0</r>
+        <g>0</g>
+        <b>255</b>
+    </transparentLayer>
+    <transparentLayer transparent="3">
+        <r>0</r>
+        <g>155</g>
+        <b>80</b>
+    </transparentLayer>
+    <transparentLayer transparent="4">
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+    </transparentLayer>
+    <transparentLayer transparent="5">
+        <r>0</r>
+        <g>0</g>
+        <b>0</b>
+    </transparentLayer>
+
+    <!-- **************************************** LAYERS **************************************** -->
+    <layer name="Node" fun="ART" extraFun="nonelectrical">
+        <transparentColor transparent="1"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+    </layer>
+
+    <layer name="Arc" fun="UNKNOWN">
+        <transparentColor transparent="2"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+    </layer>
+
+    <layer name="Outpad" fun="OVERGLASS">
+        <transparentColor transparent="3"/>
+        <patternedOnDisplay>false</patternedOnDisplay>
+        <patternedOnPrinter>false</patternedOnPrinter>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <pattern>                </pattern>
+        <outlined>NOPAT</outlined>
+        <opacity>0.8</opacity>
+        <foreground>true</foreground>
+        <display3D thick="0.0" height="0.0" mode="NONE" factor="0.0"/>
+    </layer>
+
+    <!-- ******************** ARCS ******************** -->
+    <arcProto name="wire" fun="METAL1">
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>400.0</antennaRatio>
+        <arcLayer layer="Arc" style="CLOSED"/>
+    </arcProto>
+
+    <arcProto name="bus" fun="BUS">
+        <extended>true</extended>
+        <fixedAngle>true</fixedAngle>
+        <angleIncrement>45</angleIncrement>
+        <antennaRatio>200.0</antennaRatio>
+        <diskOffset untilVersion="2" width="1.0"/>
+        <arcLayer layer="Arc" style="CLOSED">
+            <lambda>1.0</lambda>
+        </arcLayer>
+    </arcProto>
+
+    <!-- ******************** NODES ******************** -->
+    <primitiveNode name="wire_pin" fun="PIN">
+        <square/>
+        <wipes/>
+        <diskOffset untilVersion="2" x="0.5" y="0.5"/>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="-0.5" khx="0.5" kly="-0.5" khy="0.5"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Arc" style="DISC">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="0.5" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="wire">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="bus_pin" fun="PIN">
+        <!--shrinkArcs/-->
+        <diskOffset untilVersion="2" x="1.0" y="1.0"/>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="-1.0" khx="1.0" kly="-1.0" khy="1.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Node" style="CROSSED">
+            <box>
+                <lambdaBox klx="-1.0" khx="1.0" kly="-1.0" khy="1.0"/>
+            </box>
+        </nodeLayer>
+        <primitivePort name="bus">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>bus</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="adder" fun="UNKNOWN">
+        <square/>
+        <diskOffset untilVersion="2" x="2.0" y="2.0"/>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Node" style="OPENED" portNum="-1">
+            <points/>
+            <techPoint xm="0.25" xa="1.0" ym="0.25" ya="1.0"/>
+            <techPoint xm="-0.25" xa="-1.0" ym="0.25" ya="1.0"/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="-0.25" xa="-1.0" ym="-0.25" ya="-1.0"/>
+            <techPoint xm="0.25" xa="1.0" ym="-0.25" ya="-1.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="5">
+            <points/>
+            <techPoint xm="0.3" xa="1.2" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="CIRCLE" portNum="-1">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="5">
+            <points/>
+            <techPoint xm="0.4" xa="1.6" ym="0.1" ya="0.4"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.4" xa="1.6" ym="-0.1" ya="-0.4"/>
+        </nodeLayer>
+        <primitivePort name="in1">
+            <portAngle primary="270" range="15"/>
+            <portTopology>4</portTopology>
+            <box klx="0.0" khx="0.0" kly="1.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="2.0" khy="2.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in2">
+            <portAngle primary="225" range="15"/>
+            <portTopology>0</portTopology>
+            <box klx="-0.7071068" khx="-0.7071068" kly="0.7071068" khy="0.7071068">
+                <lambdaBox klx="-1.415" khx="-1.415" kly="1.415" khy="1.415"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in3">
+            <portAngle primary="180" range="15"/>
+            <portTopology>1</portTopology>
+            <box khx="-1.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="-2.0" khx="-2.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in4">
+            <portAngle primary="135" range="15"/>
+            <portTopology>2</portTopology>
+            <box klx="-0.7071068" khx="-0.7071068" kly="-0.7071068" khy="-0.7071068">
+                <lambdaBox klx="-1.415" khx="-1.415" kly="-1.415" khy="-1.415"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in5">
+            <portAngle primary="90" range="15"/>
+            <portTopology>3</portTopology>
+            <box klx="0.0" khx="0.0" khy="-1.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="-2.0" khy="-2.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="out">
+            <portAngle primary="0" range="45"/>
+            <portTopology>5</portTopology>
+            <box klx="1.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="2.0" khx="2.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="multiplier" fun="UNKNOWN">
+        <square/>
+        <diskOffset untilVersion="2" x="2.0" y="2.0"/>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Node" style="OPENED" portNum="-1">
+            <points/>
+            <techPoint xm="0.25" xa="1.0" ym="0.25" ya="1.0"/>
+            <techPoint xm="-0.25" xa="-1.0" ym="-0.25" ya="-1.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="-1">
+            <points/>
+            <techPoint xm="-0.25" xa="-1.0" ym="0.25" ya="1.0"/>
+            <techPoint xm="0.25" xa="1.0" ym="-0.25" ya="-1.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="CIRCLE" portNum="-1">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="5">
+            <points/>
+            <techPoint xm="0.3" xa="1.2" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="5">
+            <points/>
+            <techPoint xm="0.4" xa="1.6" ym="0.1" ya="0.4"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.4" xa="1.6" ym="-0.1" ya="-0.4"/>
+        </nodeLayer>
+        <primitivePort name="in1">
+            <portAngle primary="270" range="15"/>
+            <portTopology>4</portTopology>
+            <box klx="0.0" khx="0.0" kly="1.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="2.0" khy="2.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in2">
+            <portAngle primary="225" range="15"/>
+            <portTopology>0</portTopology>
+            <box klx="-0.7071068" khx="-0.7071068" kly="0.7071068" khy="0.7071068">
+                <lambdaBox klx="-1.415" khx="-1.415" kly="1.415" khy="1.415"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in3">
+            <portAngle primary="180" range="15"/>
+            <portTopology>1</portTopology>
+            <box khx="-1.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="-2.0" khx="-2.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in4">
+            <portAngle primary="135" range="15"/>
+            <portTopology>2</portTopology>
+            <box klx="-0.7071068" khx="-0.7071068" kly="-0.7071068" khy="-0.7071068">
+                <lambdaBox klx="-1.415" khx="-1.415" kly="-1.415" khy="-1.415"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in5">
+            <portAngle primary="90" range="15"/>
+            <portTopology>3</portTopology>
+            <box klx="0.0" khx="0.0" khy="-1.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="-2.0" khy="-2.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="out">
+            <portAngle primary="0" range="45"/>
+            <portTopology>5</portTopology>
+            <box klx="1.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="2.0" khx="2.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="timedelay" fun="UNKNOWN">
+        <diskOffset untilVersion="2" x="2.0" y="2.0"/>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Node" style="OPENED" portNum="-1">
+            <points/>
+            <techPoint xm="-0.25" xa="-1.0" ym="0.25" ya="1.0"/>
+            <techPoint xm="0.25" xa="1.0" ym="0.25" ya="1.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="-1">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.25" ya="1.0"/>
+            <techPoint xm="0.0" xa="0.0" ym="-0.25" ya="-1.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="1">
+            <points/>
+            <techPoint xm="0.3" xa="1.2" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="CLOSED" portNum="-1">
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="1">
+            <points/>
+            <techPoint xm="0.4" xa="1.6" ym="0.1" ya="0.4"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.4" xa="1.6" ym="-0.1" ya="-0.4"/>
+        </nodeLayer>
+        <primitivePort name="in">
+            <portAngle primary="180" range="15"/>
+            <portTopology>0</portTopology>
+            <box khx="-1.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="-2.0" khx="-2.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="out">
+            <portAngle primary="0" range="45"/>
+            <portTopology>1</portTopology>
+            <box klx="1.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="2.0" khx="2.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="multiplexer" fun="UNKNOWN">
+        <diskOffset untilVersion="2" x="2.0" y="2.0"/>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Node" style="OPENED" portNum="-1">
+            <points/>
+            <techPoint xm="-0.2" xa="-0.8" ym="-0.05" ya="-0.2"/>
+            <techPoint xm="-0.25" xa="-1.0" ym="-0.25" ya="-1.0"/>
+            <techPoint xm="-0.1" xa="-0.4" ym="-0.3" ya="-1.2"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="1">
+            <points/>
+            <techPoint xm="-0.5" xa="-2.0" ym="0.25" ya="1.0"/>
+            <techPoint xm="-0.25" xa="-1.0" ym="0.25" ya="1.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="-1">
+            <points/>
+            <techPoint xm="-0.5" xa="-2.0" ym="-0.25" ya="-1.0"/>
+            <techPoint xm="-0.25" xa="-1.0" ym="-0.25" ya="-1.0"/>
+            <techPoint xm="0.25" xa="1.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="CLOSED" portNum="-1">
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeLayer>
+        <primitivePort name="in1">
+            <portAngle primary="270" range="15"/>
+            <portTopology>1</portTopology>
+            <box khx="-1.0" kly="0.5" khy="0.5">
+                <lambdaBox klx="-2.0" khx="-2.0" kly="1.0" khy="1.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in2">
+            <portAngle primary="135" range="15"/>
+            <portTopology>0</portTopology>
+            <box khx="-1.0" kly="-0.5" khy="-0.5">
+                <lambdaBox klx="-2.0" khx="-2.0" kly="-1.0" khy="-1.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="out">
+            <portAngle primary="0" range="45"/>
+            <portTopology>2</portTopology>
+            <box klx="1.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="2.0" khx="2.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="subtractor" fun="UNKNOWN">
+        <square/>
+        <diskOffset untilVersion="2" x="2.0" y="2.0"/>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Node" style="OPENED" portNum="-1">
+            <points/>
+            <techPoint xm="-0.25" xa="-1.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.25" xa="1.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="5">
+            <points/>
+            <techPoint xm="0.3" xa="1.2" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="5">
+            <points/>
+            <techPoint xm="0.4" xa="1.6" ym="0.1" ya="0.4"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.4" xa="1.6" ym="-0.1" ya="-0.4"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="CIRCLE" portNum="-1">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="in1">
+            <portAngle primary="270" range="15"/>
+            <portTopology>4</portTopology>
+            <box klx="0.0" khx="0.0" kly="1.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="2.0" khy="2.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in2">
+            <portAngle primary="225" range="15"/>
+            <portTopology>0</portTopology>
+            <box klx="-0.7071068" khx="-0.7071068" kly="0.7071068" khy="0.7071068">
+                <lambdaBox klx="-1.415" khx="-1.415" kly="1.415" khy="1.415"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in3">
+            <portAngle primary="180" range="15"/>
+            <portTopology>1</portTopology>
+            <box khx="-1.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="-2.0" khx="-2.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in4">
+            <portAngle primary="135" range="15"/>
+            <portTopology>2</portTopology>
+            <box klx="-0.7071068" khx="-0.7071068" kly="-0.7071068" khy="-0.7071068">
+                <lambdaBox klx="-1.415" khx="-1.415" kly="-1.415" khy="-1.415"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in5">
+            <portAngle primary="90" range="15"/>
+            <portTopology>3</portTopology>
+            <box klx="0.0" khx="0.0" khy="-1.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="-2.0" khy="-2.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="out">
+            <portAngle primary="0" range="45"/>
+            <portTopology>5</portTopology>
+            <box klx="1.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="2.0" khx="2.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="divider" fun="UNKNOWN">
+        <square/>
+        <diskOffset untilVersion="2" x="2.0" y="2.0"/>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Node" style="OPENED" portNum="-1">
+            <points/>
+            <techPoint xm="-0.05" xa="-0.2" ym="-0.25" ya="-1.0"/>
+            <techPoint xm="0.05" xa="0.2" ym="-0.25" ya="-1.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="-1">
+            <points/>
+            <techPoint xm="-0.25" xa="-1.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.25" xa="1.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="-1">
+            <points/>
+            <techPoint xm="-0.05" xa="-0.2" ym="0.25" ya="1.0"/>
+            <techPoint xm="0.05" xa="0.2" ym="0.25" ya="1.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="4">
+            <points/>
+            <techPoint xm="0.4" xa="1.6" ym="0.1" ya="0.4"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.4" xa="1.6" ym="-0.1" ya="-0.4"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="OPENED" portNum="4">
+            <points/>
+            <techPoint xm="0.3" xa="1.2" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="CIRCLE" portNum="-1">
+            <points/>
+            <techPoint xm="0.0" xa="0.0" ym="0.0" ya="0.0"/>
+            <techPoint xm="0.5" xa="2.0" ym="0.0" ya="0.0"/>
+        </nodeLayer>
+        <primitivePort name="in1">
+            <portAngle primary="270" range="15"/>
+            <portTopology>4</portTopology>
+            <box klx="0.0" khx="0.0" kly="1.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="2.0" khy="2.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in2">
+            <portAngle primary="225" range="15"/>
+            <portTopology>0</portTopology>
+            <box klx="-0.7071068" khx="-0.7071068" kly="0.7071068" khy="0.7071068">
+                <lambdaBox klx="-1.415" khx="-1.415" kly="1.415" khy="1.415"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in3">
+            <portAngle primary="180" range="15"/>
+            <portTopology>1</portTopology>
+            <box khx="-1.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="-2.0" khx="-2.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in4">
+            <portAngle primary="135" range="15"/>
+            <portTopology>2</portTopology>
+            <box klx="-0.7071068" khx="-0.7071068" kly="-0.7071068" khy="-0.7071068">
+                <lambdaBox klx="-1.415" khx="-1.415" kly="-1.415" khy="-1.415"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="in5">
+            <portAngle primary="90" range="15"/>
+            <portTopology>3</portTopology>
+            <box klx="0.0" khx="0.0" khy="-1.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="-2.0" khy="-2.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+        <primitivePort name="out">
+            <portAngle primary="0" range="45"/>
+            <portTopology>5</portTopology>
+            <box klx="1.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="2.0" khx="2.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="padin" fun="CONNECT">
+        <diskOffset untilVersion="2" x="2.0" y="2.0"/>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Node" style="CROSSED">
+            <box klx="-0.5" khx="0.5" kly="-0.5" khy="0.5">
+                <lambdaBox klx="-1.0" khx="1.0" kly="-1.0" khy="1.0"/>
+            </box>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="CLOSED">
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeLayer>
+        <primitivePort name="out">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <primitiveNode name="padout" fun="CONNECT">
+        <diskOffset untilVersion="2" x="2.0" y="2.0"/>
+        <nodeBase>
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeBase>
+        <nodeLayer layer="Outpad" style="CROSSED">
+            <box klx="-0.5" khx="0.5" kly="-0.5" khy="0.5">
+                <lambdaBox klx="-1.0" khx="1.0" kly="-1.0" khy="1.0"/>
+            </box>
+        </nodeLayer>
+        <nodeLayer layer="Node" style="CLOSED">
+            <box>
+                <lambdaBox klx="-2.0" khx="2.0" kly="-2.0" khy="2.0"/>
+            </box>
+        </nodeLayer>
+        <primitivePort name="in">
+            <portAngle primary="0" range="180"/>
+            <portTopology>0</portTopology>
+            <box klx="0.0" khx="0.0" kly="0.0" khy="0.0">
+                <lambdaBox klx="0.0" khx="0.0" kly="0.0" khy="0.0"/>
+            </box>
+            <portArc>wire</portArc>
+        </primitivePort>
+    </primitiveNode>
+
+    <menuPalette numColumns="2">
+
+        <menuBox>
+            <menuArc>wire</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNode>multiplier</menuNode>
+        </menuBox>
+
+        <menuBox>
+            <menuArc>bus</menuArc>
+        </menuBox>
+        <menuBox>
+            <menuNode>timedelay</menuNode>
+        </menuBox>
+
+        <menuBox>
+            <menuText>Cell</menuText>
+        </menuBox>
+        <menuBox>
+            <menuNode>multiplexer</menuNode>
+        </menuBox>
+
+        <menuBox>
+            <menuText>Misc.</menuText>
+        </menuBox>
+        <menuBox>
+            <menuNode>subtractor</menuNode>
+        </menuBox>
+
+        <menuBox>
+            <menuText>Pure</menuText>
+        </menuBox>
+        <menuBox>
+            <menuNode>divider</menuNode>
+        </menuBox>
+
+        <menuBox>
+            <menuNodeInst protoName="wire_pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNode>padin</menuNode>
+        </menuBox>
+
+        <menuBox>
+            <menuNodeInst protoName="bus_pin" function="PIN"/>
+        </menuBox>
+        <menuBox>
+            <menuNode>padout</menuNode>
+        </menuBox>
+
+        <menuBox>
+            <menuNode>adder</menuNode>
+        </menuBox>
+        <menuBox/>
+
+    </menuPalette>
+
+    <Foundry name="NONE"/>
+</technology>

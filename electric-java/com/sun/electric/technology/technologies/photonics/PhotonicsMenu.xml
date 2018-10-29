@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+ *
+ * Electric(tm) VLSI Design System
+ *
+ * File: PhotonicsMenu.xml
+ * photonics technology component menu
+ *
+ * Copyright (c) 2015, Static Free Software. All rights reserved.
+ *
+ * Electric(tm) is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Electric(tm) is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<menuPalette numColumns="3">
+
+    <menuBox>
+        <menuNodeInst protoName="Splitter" function="UNKNOWN">
+            <menuNodeText text="Splt" size="7.0"/>
+        </menuNodeInst>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="P-Transistor" function="TRAPMOS">
+            <menuNodeText text="pMos" size="7.0"/>
+        </menuNodeInst>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="N-Transistor" function="TRANMOS">
+            <menuNodeText text="nMos" size="7.0"/>
+        </menuNodeInst>
+    </menuBox>
+
+    <menuBox>
+        <menuNodeInst protoName="Ring" function="UNKNOWN">
+            <menuNodeText text="Ring" size="7.0"/>
+        </menuNodeInst>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="m1-pwell-Con" function="SUBSTRATE">
+            <menuNodeText text="pWell" size="4.5"/>
+        </menuNodeInst>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="m1-nwell-Con" function="WELL">
+            <menuNodeText text="nWell" size="4.5"/>
+        </menuNodeInst>
+    </menuBox>
+
+    <menuBox>
+        <menuNodeInst protoName="Grating-Coupler" function="UNKNOWN">
+            <menuNodeText text="G.C." size="4.5"/>
+        </menuNodeInst>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="Photo-Detector" function="CONTACT">
+        	<menuNodeText text="P.D." size="7.0"/>
+        </menuNodeInst>
+    </menuBox>
+    <menuBox>
+    </menuBox>
+
+    <menuBox>
+        <menuArc>Optical</menuArc>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="Optical-Pin" function="PIN"/>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="Optical-Corner-90" function="CONNECT"/>
+        <menuNodeInst protoName="Optical-Corner-45" function="CONNECT"/>
+    </menuBox>
+
+    <menuBox>
+        <menuArc>P-Active</menuArc>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="p-active-Pin" function="PIN"/>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="m1-p-active-Con" function="CONTACT">
+            <menuNodeText text="pAct" size="5.0"/>
+        </menuNodeInst>
+    </menuBox>
+
+    <menuBox>
+        <menuArc>N-Active</menuArc>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="n-active-Pin" function="PIN"/>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="m1-n-active-Con" function="CONTACT">
+            <menuNodeText text="nAct" size="5.0"/>
+        </menuNodeInst>
+    </menuBox>
+
+    <menuBox>
+        <menuArc>poly</menuArc>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="poly-Pin" function="PIN"/>
+    </menuBox>
+    <menuBox>
+        <menuNode>m1-poly-Con</menuNode>
+    </menuBox>
+
+    <menuBox>
+        <menuArc>metal-1</menuArc>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="m1-Pin" function="PIN"/>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="m1-m2-Con" function="CONTACT"/>
+    </menuBox>
+
+    <menuBox>
+        <menuArc>metal-2</menuArc>
+    </menuBox>
+    <menuBox>
+        <menuNodeInst protoName="m2-Pin" function="PIN"/>
+    </menuBox>
+    <menuBox>
+    </menuBox>
+
+    <menuBox>
+        <menuText>Pure</menuText>
+    </menuBox>
+    <menuBox>
+        <menuText>Misc.</menuText>
+    </menuBox>
+    <menuBox>
+        <menuText>Cell</menuText>
+    </menuBox>
+
+</menuPalette>

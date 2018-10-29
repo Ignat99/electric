@@ -1,0 +1,114 @@
+<!-- HEADER 9-6-7: Clock Routing -->
+
+<!-- COMMAND Tools/Routing/Clock Routing... -->
+
+<p>
+The clock router connects multiple clocked cells to a single clock generator,
+ensuring a constant wire length to each clocked cell.
+It does this by building tree structures in user-specified routing channels,
+adding serpentine wires if necessary to balance the length.
+The router can also insert balanced repeaters
+and can route multiple, independent trees, all with the same wire lengths.
+<P>
+The Clock Router is run with the <B>Clock Routing...</B> command (in menu <B>Tools / Routing</B>).
+The command prompts for a command file that specifies the clock routing task.
+The command file contains directives that describe the source and destination nodes,
+the routing channels, and other routing parameters.
+These are the directives that can appear in the command file:
+<ul>
+<li><b>UNITS</b> describes the scale to be applied to distances in this file. It has these parameters:
+  <ul>
+  <li><b>MICRONS</b> specifies the number of units (in this file) per micron.
+For nanometer design, this value should be 1000.</li>
+  </ul>
+</li>
+<li><b>START-PATH</b> declares the beginning of a synchronized path.
+Since multiple trees can be routed with the same length wires in each,
+the START-PATH and END-PATH directives are used to mark the individual trees.</li>
+<li><b>END-PATH</b> declares the end of a synchronized path.</li>
+<li><b>SOURCE</b> describes the clock-generator cell. It has these parameters:
+  <ul>
+  <li><b>NODE</b> specifies the cell name that generates clock signals.</li>
+  <li><b>PORT</b> specifies the port on the clock generator cell to connect.</li>
+  <li><b>STUBX / STUBY</b> (optional) is the X/Y delta of a "stub" arc that will be drawn out of the clock generator port (in UNITS).</li>
+  </ul>
+</li>
+<li><b>DESTINATION</b> describes the cells that are being clocked. It has these parameters:
+  <ul>
+  <li><b>NODE</b> specifies the cell name for instances being clocked.</li>
+  <li><b>PORT</b> specifies the port on the clocked instances to connect.</li>
+  <li><b>STUB</b> (optional) is the length of a "stub" arc that will be drawn out of the clocked instances (in UNITS).</li>
+  </ul>
+</li>
+<li><b>LAYERS</b> describes the horizontal and vertical layers to use for routing. It has these parameters:
+  <ul>
+  <li><b>HORIZONTAL</b> specifies the metal layer number for horizontal arcs. "1" means Metal-1, etc.</li>
+  <li><b>VERTICAL</b> specifies the metal layer number for vertical arcs. "1" means Metal-1, etc.</li>
+  <li><b>HORIZONTAL-SCALE</b> (optional) is a width-scale for horizontal arcs. The default value is 1, but anything
+larger will cause horizontal arcs to scale by that factor over their default width.</li>
+  <li><b>VERTICAL-SCALE</b> (optional) is a width-scale for vertical arcs. The default value is 1, but anything
+larger will cause vertical arcs to scale by that factor over their default width.</li>
+  </ul>
+</li>
+<li><b>CHANNEL</b> describes a routing channel. It has these parameters:
+  <ul>
+  <li><b>NAME</b> specifies the name of this routing channel.</li>
+  <li><b>IN</b> specifies the side of the channel that has the input (from the clock generator).</li>
+  <li><b>OUT</b> specifies the side of the channel that has the output (to the clocked instances).</li>
+  </ul>
+After the parameters comes a list of destinations.
+The destinations can be cell instance names for the clocked instances,
+or it can be the name of a previous routing channel.
+</li>
+<li><b>REPEATER</b> describes rules for placing repeaters. It has these parameters:
+  <ul>
+  <li><b>CELL</b> specifies the cell to be used as a repeater.
+The cell must have exactly one input port and one output port.</li>
+  <li><b>DIST</b> specifies the distance between repeaters (in UNITS).</li>
+  <li><b>CONNECT</b> specifies the metal layer number to use when approaching the ports of the repeater cell.</li>
+  <li><b>INSTNAME</b> specifies an instance name to give repeater cells (default is CLK_BUF).</li>
+  <li><b>NETNAME</b> specifies a network name to give repeater networks (default is CLK).</li>
+  </ul>
+</li>
+<li><b>ROW</b> describes rules for grid locations of repeaters. Unlike the other directives,
+the ROW command follows the DEF syntax, allowing blocks of ROW specifications to be
+copied directly from a DEF file.
+The ROW statement has this structure:<br>
+&nbsp;&nbsp;&nbsp;ROW <b>Name</b> UNIT <b>X-loc Y-loc Orient</b> DO <b>X-repeat</b> BY <b>Y-repeat</b> STEP <b>X-step Y-step</b> ;<br>
+Where:
+  <ul>
+  <li><b>Name</b> is the name of this row (ignored).
+  <li><b>X-loc / Y-loc</b> is the coordinate (in UNITS) of the start of the row.
+Coordinates define the lower-left corner of the repeater cell instance.
+  <li><b>Orient</b> is the orientation of the repeater placement.
+Possible orientations are <b>N</b> (no rotation), <b>S</b> (180 degree rotation),
+<b>E</b> (270 degree rotation), and <b>W</b> (90 degree rotation).
+If the letter <b>F</b> preceeds the orientation (for example <b>FN</b>) then the orientation
+is flipped after rotation.
+  <li><b>X-repeat / Y-repeat</b> is the number of times in X or Y that the repeater may appear in the row.
+  <li><b>X-step / Y-step</b> is the distance (in UNITS) along the row of each step.
+  </ul>
+</li>
+</ul>
+<!-- NEED 6in -->
+<p>
+Here is an example of clock routing. This is the command file:
+<CODE><FONT SIZE="-1"><br>
+&nbsp;&nbsp;&nbsp;# Clock routing command file<br>
+&nbsp;&nbsp;&nbsp;START-PATH<br>
+&nbsp;&nbsp;&nbsp;SOURCE      NODE=clockGen PORT=clkOut STUBX=25 STUBY=0<br>
+&nbsp;&nbsp;&nbsp;DESTINATION NODE=destCell  PORT=clk STUB=10<br>
+&nbsp;&nbsp;&nbsp;LAYERS      HORIZONTAL=1 VERTICAL=2<br>
+&nbsp;&nbsp;&nbsp;CHANNEL NAME=a     IN=down OUT=left  d1 d2 d3 d4<br>
+&nbsp;&nbsp;&nbsp;CHANNEL NAME=b     IN=down OUT=right d5 d6 d7 d8<br>
+&nbsp;&nbsp;&nbsp;CHANNEL NAME=whole IN=left OUT=up    a b<br>
+&nbsp;&nbsp;&nbsp;END-PATH
+</FONT></CODE>
+
+<p>
+Note that there are two CHANNELs named "a" and "b" that connect the two columns of four cells.
+Then there is a third CHANNEL ("whole") that connects the "a" and "b" channels.
+<p>
+<CENTER><IMG SRC="fig09-70.png" ALT="Figure 9.70"></CENTER>
+
+<!-- TRAILER -->

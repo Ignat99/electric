@@ -1,0 +1,68 @@
+<!-- NEED 5in -->
+
+<!-- HEADER 1-4-5: Eclipse Access to the savannah.gnu.org Repository -->
+
+<ol>
+<li>Install Eclipse:
+    <ul>
+    <li>Install from <a href="http://www.eclipse.org">www.eclipse.org</a>.
+        The instructions use the "Juno" or later version.</li>
+    <li>Because compiling Electric consumes more than average memory,
+        edit the file <b>eclipse.ini</b> in the installed area and change the last line from <b>-Xmx512m</b> to <b>-Xmx1024</b>.</li>
+    </ul>
+</li>
+<li>Add Subversions to Eclipse:
+    <ul>
+    <li>Do: <b>Help / Install New Software</b></li>
+    <li>Work with <b>http://subclipse.tigris.org/update_1.6.x</b>
+    </ul>
+</li>
+<li>Add Scala to Eclipse:
+    <ul>
+    <li>Do: <b>Help / Install New Software</b></li>
+    <li>Work with <b>http://download.scala-ide.org/sdk/e38/scala29/stable/site</b> (check all 3)</li>
+    </ul>
+</li>
+<li>Download Electric:
+    <ul>
+    <li>Do: <b>File / Import</b></li>
+    <li>Choose: <b>SVN / Checkout Projects from SVN</b></li>
+    <li>Repository is: <b>svn+ssh://strubin@svn.savannah.gnu.org/electric/trunk</b><br/>
+	Select the top-level<br/>
+	When asked, choose "Check out as a project in the workspace" and name it "Electric"</li>
+    </ul>
+</li>
+<li>Make two Electric projects, one for Java code, one for Scala code:
+    <ul>
+    <li>Do: <b>File / New / Java Project</b></li>
+    <li>Browse to: <b>Electric/electric-java</b></li>
+    <li>Set output to: <b>electric-java/bin</b></li>
+    <li>Set external libraries to these JAR files in the "packaging" folder:<br/>
+	AppleJavaExtensions-1.4, scala-library-2.9.1.jar, slf4j-api-1.6.2, slf4j-jdk14-1.6.2,<br/>
+	j3dcore, j3dutils, vecmath, jmf.jar, bsh-2.0b4, jython.jar
+    <li>Do: <b>File / New / Java Project</b></li>
+    <li>Browse to: <b>Electric/electric-scala</b></li>
+    <li>Set output to: <b>electric-scala/bin</b></li>
+    <li>Set external libraries to these JAR files in the "packaging" folder: slf4j-api-1.6.2, slf4j-jdk14-1.6.2
+    <li>Right-click on "electric-scala" project and choose "Configure / Add Scala Nature"
+    </ul>
+</li>
+<li>Link the two Electric projects:
+    <ul>
+    <li>Right-click the "electric-scala" project, choose <b>Properties</b>, then <b>Java Build Path</b><br/>
+	Under the "Projects" tab, click "Add..." and add the "electric-java" project.</li>
+    <li>Right-click the "electric-java" project, choose <b>Properties</b>, then <b>Java Build Path</b><br/>
+	Under the "Libraries" tab, click "Add Class Folder" and choose "electric-scala/bin".</li>
+    </ul>
+</li>
+<li>Make a launch configuration:
+    <ul>
+    <li>Do: <b>Run / Run configurations</b></li>
+    <li>Create a new launch configuration (icon in upper-left)</li>
+    <li>In the <b>Main</b> tab, set the project to <b>electric</b> and the main class to <b>com.sun.electric.Launcher</b></li>
+    <li>In the <b>Arguments</b> tab, set the VM arguments to <b>-mx1200m</b> (to request a 1.2GB JVM)</li>
+    </ul>
+</li>
+</ol>
+
+<!-- TRAILER -->

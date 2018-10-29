@@ -1,0 +1,5 @@
+Pending tasks
+- Initialization of VddGndStraps.METALS, PINS and fillContacts doesn't not allow to run 2 fill generatiosn of different
+technologies (June 18, 2007)
+-  boolean horizontalBar = (rotated) ? (ap == Tech.m3() || ap == Tech.m5()) : (ap == Tech.m4() || ap == Tech.m6());
+    => It should be until Tech.m8() for CMOS90

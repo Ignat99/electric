@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- -*- tab-width: 4 -*-  -->
+
+<!-- Electric(tm) VLSI Design System -->
+
+<!-- File: build.xml -->
+
+<!-- Copyright (c) 2012, Static Free Software. All rights reserved. -->
+
+<!-- Electric(tm) is free software; you can redistribute it and/or modify -->
+<!-- it under the terms of the GNU General Public License as published by -->
+<!-- the Free Software Foundation; either version 3 of the License, or -->
+<!-- (at your option) any later version. -->
+
+<!-- Electric(tm) is distributed in the hope that it will be useful, -->
+<!-- but WITHOUT ANY WARRANTY; without even the implied warranty of -->
+<!-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the -->
+<!-- GNU General Public License for more details. -->
+
+<!-- You should have received a copy of the GNU General Public License -->
+<!-- along with this program.  If not, see http://www.gnu.org/licenses/ -->
+
+<project basedir="." default="jar" name="electric">
+
+	<!-- *********************************** MAIN TARGET *********************************** -->
+
+	<target name="jar" depends="initialize" description="Make Jar file incrementally">
+		<property name="jarname" value="electric-${version}.jar" />
+		<echo message="Building ${jarname}" />
+		<mkdir dir="${antBuild}"/>
+		<antcall target="compile" />
+		<antcall target="copyOrg" />
+		<antcall target="createJARFile" />
+	</target>
+
+	<!-- *********************************** SUPPORT TARGETS *********************************** -->
+
+	<target name="initialize" description="Initiaize file locations, JAR locations, and the Electric version">
+		<property name="packaging"          value="${user.dir}" />
+		<property name="antBuild"           value="${packaging}/antBuild" />
+		<property name="ElectricJavaLoc"    value="${user.dir}" />
+
+		<!-- the location of various JAR files -->
+		<property name="org"                value="${packaging}/org" />
+		<property name="AppleJava"          value="${packaging}/AppleJavaExtensions-1.4.jar" />
+
+		<!-- does the build directory already exist? -->
+		<condition property="buildDirExists">
+			<available file="${antBuild}" type="dir"/>
+		</condition>
+
+		<!-- get the Electric version -->
+		<loadfile srcFile="${ElectricJavaLoc}/com/sun/electric/database/text/Version.java" property="version">
+			<filterchain>
+				<linecontains> <contains value="ELECTRIC_VERSION = "/> </linecontains>
+				<tokenfilter>
+					<replacestring from="public static final String ELECTRIC_VERSION = &quot;" to=""/>
+					<replacestring from="&quot;;" to=""/>
+					<deletecharacters chars="\t "/>
+				</tokenfilter>
+				<striplinebreaks/>
+			</filterchain>
+		</loadfile>
+	</target>
+
+	<target name="compile" description="Compile Electric">
+		<javac debug="true" includeantruntime="false" destdir="${antBuild}" srcdir="${ElectricJavaLoc}"
+			   fork="true" memoryMaximumSize="1024m" source="1.8" target="1.8">
+			<classpath>
+				<pathelement location="${packaging}" />
+				<pathelement location="${AppleJava}" />
+			</classpath>
+		</javac>
+		<copy todir="${antBuild}/com">
+			<fileset dir="${ElectricJavaLoc}/com"
+                         includes="**/*.jelib,**/*.prm,**/*.xml,**/*.dtd,**/*.xsd,**/*.gif,**/*.html,**/*.png,**/toc.txt,**/*.wav,**/*.dat" />
+		</copy>
+	</target>
+
+	<target name="copyOrg" description="Copy Jar files for logging">
+		<copy todir="${antBuild}/org">
+			<fileset dir="${packaging}/org" />
+		</copy>
+	</target>
+
+	<target name="createJARFile" description="Make the JAR file">
+		<jar basedir="${antBuild}" compress="true" jarfile="${packaging}/${jarname}" manifest="${packaging}/META-INF/MANIFEST.MF" />
+	</target>
+
+	<target name="clean" depends="initialize" description="Clean all build products">
+		<delete dir="${antBuild}" />
+		<delete quiet="false">
+			<fileset dir=".">
+				<include name="electric*.jar" />
+			</fileset>
+		</delete>
+	</target>
+
+</project>

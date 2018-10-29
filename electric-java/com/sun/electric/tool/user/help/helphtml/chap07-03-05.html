@@ -1,0 +1,62 @@
+<!-- NEED 4in -->
+
+<!-- HEADER 7-3-5: LEF/DEF Control -->
+
+<!-- PREFERENCE I/O/LEF -->
+<!-- PREFERENCE I/O/DEF -->
+
+LEF (Library Exchange Format) and DEF (Design Exchange Format) are recent interchange formats for CAD systems.
+For more information on reading and writing LEF and DEF, see
+<A HREF="chap03-09-02.html#chap03-09-02">Section 3-9-2</A> and
+<A HREF="chap03-09-03.html#chap03-09-03">Section 3-9-3</A>,
+respectively.
+<P>
+<TABLE><TR><TD>
+LEF options are controlled with the LEF Preferences
+(in menu <B>File / Preferences...</B>, "I/O" section, "LEF" tab).
+You can choose whether or not to ignore ungenerated pins.
+Ungenerated pins are those that have no location information, and are not fully part of the design.
+If they are not ignored (the box is unchecked) they are placed at the origin.
+You can choose what to do with unrecognized layers (either ignore them or use the DRC-exclusion layer).
+You can also ask Electric to ignore any technology information when reading the LEF file.
+</TD><TD><CENTER><IMG SRC="fig07-23.png" ALT="Figure 7.23"></CENTER></TD></TR></TABLE>
+
+
+<TABLE><TR><TD><CENTER><IMG SRC="fig07-07.png" ALT="Figure 7.7"></CENTER></TD><TD>
+DEF options are controlled with the DEF Preferences
+(in menu <B>File / Preferences...</B>, "I/O" section, "DEF" tab).
+This dialog controls whether DEF reads physical and/or logical information.
+If a type of interconnect is not checked, the DEF input reader ignores those arcs.
+</TD></TR></TABLE>
+<P>
+DEF interconnect is specified in the NETS and SPECIALNETS sections.
+Typically, the SPECIALNETS are pre-routed geometry (physical) and
+the NETS are routed geometry (physical) or unrouted information (logical).
+Check "Ignore physical interconnect in NETS section" to skip any routed arcs (physical)
+found in the NETS section.
+Check "Ignore logical interconnect in SPECIALNETS section" to skip any unrouted arcs (logical)
+found in the SPECIALNETS section.
+<P>
+Physical NETS are read as arcs on different layers that connect the circuitry.
+This can take a lot of time to place.
+If it takes too long, and if the connectivity information is not needed,
+check "Use pure-layer nodes instead of arcs" to use pure-layer nodes instead of arcs.
+<P>
+When unknown cells are referenced by the DEF file,
+an error is issued.
+If "Make dummy cells for unknown cells" is checked,
+the system resolves the problem by generating the appropriate cell.
+<P>
+The "Ignore ungenerated pins (with no location)" option determines how to handle ungenerated pins.
+Ungenerated pins are those that have no location information, and are not fully part of the design.
+If they are not ignored (the box is unchecked) they are placed at the origin.
+<p>
+The "Ignore vias block" option causes vias to be dropped from import.
+<p>
+The "Place and connect all pin geometry" option connects like-named exports (called "pins" by Cadence)
+with unrouted arcs. Because Cadence systems give electrically-connected pins the same name,
+those like-named pins should all be connected. This option connects them in such a way that routers
+can wire them together.
+<p>
+Finally, you can control what happens to unrecognized layers (either ignore them or convert them to the DRC-exclusion layer).
+<!-- TRAILER -->

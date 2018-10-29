@@ -1,0 +1,376 @@
+(in-package "SV")
+
+(include-book "std/util/defconsts" :dir :system)
+(include-book "std/util/defrule" :dir :system)
+(include-book "centaur/sv/mods/compile" :dir :system)
+(include-book "centaur/sv/svtv/process" :dir :system)
+
+(local (include-book "std/basic/arith-equivs" :dir :system))
+(local (include-book "std/lists/resize-list" :dir :system))
+(local (include-book "std/lists/take" :dir :system))
+(local (include-book "std/osets/under-set-equiv" :dir :system))
+(local (in-theory (disable nfix natp)))
+
+(defconsts (*$DESIGN$-sao* state)
+  (serialize-read "$DESIGN$.sao"))
+
+(define svex-assigns-compose-modified ((x svex-alist-p)
+                              &key (rewrite 't))
+  :parents (svex-composition)
+  :short "Given an alist mapping variables to assigned expressions, compose them together into full update functions."
+  :returns (mv (rewritten-assigns svex-alist-p)
+               (raw-updates svex-alist-p)
+               (updates svex-alist-p)
+               (rest svex-alist-p)
+               (res1 svex-alist-p)
+               (res1-updates svex-alist-p)
+               (res1-updates2 svex-alist-p)
+               (xx svex-alist-p))
+  (b* ((xvals (svex-alist-vals x))
+       (- (cw "Initial count: ~x0~%" (svexlist-opcount xvals)))
+       ;;; Rewriting here at first presumably won't disrupt decompositions
+       ;;; because the expressions should be relatively small and independent,
+       ;;; to first approximation.
+       ;; (- (sneaky-save 'orig-assigns x))
+       (xvals (if rewrite (cwtime (svexlist-rewrite-top xvals :verbosep t) :mintime 0) xvals))
+       (x (pairlis$ (svex-alist-keys x) xvals))
+       (- (cw "Count after initial rewrite: ~x0~%" (svexlist-opcount xvals)))
+       (updates (cwtime (svex-compose-assigns x) :mintime 1))
+       (raw-updates updates)
+       (updates-vals (svex-alist-vals updates))
+       (- (cw "Updates count: ~x0~%" (svexlist-opcount updates-vals)))
+       (updates-vals
+        (if rewrite (cwtime (svexlist-rewrite-top updates-vals :verbosep t) :mintime 0) updates-vals))
+       (- (cw "Updates count after rewrite: ~x0~%" (svexlist-opcount updates-vals)))
+       (masks (svexlist-mask-alist updates-vals))
+       ;; (updates-vals (cwtime (svexlist-rewrite updates-vals masks) :mintime 1))
+       ;; (- (cw "Updates count after rewrite: ~x0~%" (svexlist-opcount updates-vals)))
+       ;; (updates (pairlis$ (svex-alist-keys updates) updates-vals))
+       (vars (svexlist-collect-vars updates-vals))
+       (updates (pairlis$ (svex-alist-keys updates) updates-vals))
+       (upd-subset (with-fast-alist updates (svars-extract-updates vars updates)))
+       ;; (- (acl2::sneaky-save 'updates updates))
+       (- (cw "Looping subset count: ~x0~%" (cwtime (svexlist-opcount (svex-alist-vals upd-subset)))))
+       (- (cw "Mask bits count (starting): ~x0~%" (svexlist-masks-measure vars masks)))
+       ((acl2::with-fast updates))
+       ((mv final-masks rest)
+        (cwtime (svexlist-compose-to-fix-rec2 masks upd-subset nil) :mintime 1))
+       ;; (- (sneaky-save 'assigns x)
+       ;;    (sneaky-save 'updates updates)
+       ;;    (sneaky-save 'final-masks final-masks)
+       ;;    (sneaky-save 'loop-vars vars))
+       (final-masks (make-fast-alist final-masks))
+       (- (with-fast-alist x
+            (svex-masks-summarize-loops vars final-masks x)))
+       (res1 (with-fast-alist rest
+               (svex-alist-compose* updates rest)))
+       (res1-updates (svex-compose-keep-nonzero-mask-updates res1 final-masks))
+       (- (fast-alist-free final-masks))
+       ;; This attempts to resolve apparent combinational loops by adding
+       ;; another iteration for variables that are still used in the masks.
+       ;; This isn't necessarily sufficient but it might be for simple cases.
+       (res1-updates2 (b* ((vars (svex-alist-keys res1-updates))
+                           (xes-alist (pairlis$ vars (make-list (len vars) :initial-element (svex-x)))))
+                        (with-fast-alist xes-alist (svex-alist-compose* res1-updates xes-alist))))
+       (res2 (with-fast-alist res1-updates2 (svex-alist-compose* res1 res1-updates2))))
+    (clear-memoize-table 'svex-compose*)
+    (mv x raw-updates updates rest res1 res1-updates res1-updates2 res2))
+  ///
+  (deffixequiv svex-assigns-compose))
+
+(define svex-compose-assigns/delays-modified ((assigns svex-alist-p)
+                                     (delays svar-map-p)
+                                     &key
+                                     (rewrite 't)
+                                     (verbosep 'nil))
+  :returns (mv (rewritten-assigns svex-alist-p)
+               (raw-updates svex-alist-p)
+               (updates0 svex-alist-p)
+               (rest svex-alist-p)
+               (res1 svex-alist-p)
+               (res1-updates svex-alist-p)
+               (res1-updates2 svex-alist-p)
+               (updates svex-alist-p)
+               (nextstates svex-alist-p))
+  (b* (((mv rewritten-assigns
+            raw-updates
+            updates0
+            rest
+            res1
+            res1-updates
+            res1-updates2
+            updates)
+        (cwtime (svex-assigns-compose-modified assigns :rewrite rewrite) :mintime 1))
+       (masks (svexlist-mask-alist (svex-alist-vals updates)))
+       ((with-fast updates))
+       (next-states (cwtime (svex-compose-delays delays updates masks) :mintime 1))
+       (- (clear-memoize-table 'svex-compose))
+       ((unless rewrite)
+        (mv rewritten-assigns
+            raw-updates
+            updates0
+            rest
+            res1
+            res1-updates
+            res1-updates2
+            updates
+            next-states))
+       (rewritten (svex-alist-rewrite-fixpoint (append updates next-states)
+                                               :verbosep verbosep
+                                               :count 2))
+       (updates-len (len updates))
+       (updates (take updates-len rewritten))
+       (next-states (nthcdr updates-len rewritten)))
+    (clear-memoize-table 'svex-compose)
+    (mv rewritten-assigns
+        raw-updates
+        updates0
+        rest
+        res1
+        res1-updates
+        res1-updates2
+        updates
+        next-states)))
+
+(local (defthm true-list-listp-append
+         (implies (and (true-list-listp a)
+                       (true-List-Listp b))
+                  (true-list-listp (append a b)))))
+
+(define defsvtv-main-modified ((name symbolp)
+                      (ins true-list-listp)
+                      (overrides true-list-listp)
+                      (outs true-list-listp)
+                      (internals true-list-listp)
+                      (design design-p)
+                      (simplify)
+                      (pre-simplify)
+                      (state-machine))
+  :parents (defsvtv)
+  :short "Main subroutine of @(see defsvtv), which extracts output formulas from
+          the provided design."
+  :guard (modalist-addr-p (design->modalist design))
+  :returns (mv (overridden-assigns svex-alist-p)
+               (delays svar-map-p)
+               (rewritten-assigns svex-alist-p)
+               (raw-updates svex-alist-p)
+               (updates0 svex-alist-p)
+               (rest svex-alist-p)
+               (res1 svex-alist-p)
+               (res1-updates svex-alist-p)
+               (res1-updates2 svex-alist-p)
+               (updates svex-alist-p)
+               (nextstates svex-alist-p)
+               (svtv (iff (svtv-p svtv) svtv)))
+  :guard-hints (("goal" :do-not-induct t
+                 :in-theory (enable modscope-local-bound modscope-okp modscope->modidx)))
+  :prepwork ((local (in-theory (disable max))))
+  :verbosep t
+  (b* (((acl2::local-stobjs moddb aliases)
+        (mv overridden-assigns
+            delays
+            rewritten-assigns
+            raw-updates
+            updates0
+            rest
+            res1
+            res1-updates
+            res1-updates2
+            updates
+            next-states
+            svtv
+            moddb aliases))
+       ;; Make a moddb, canonical alias table, and flattened, alias-normalized
+       ;; assignments from the design.
+       ((mv err assigns delays moddb aliases)
+        (svex-design-flatten-and-normalize design))
+       ((when err) (raise "Error flattening design: ~@0" err)
+        (mv nil nil nil nil nil nil nil nil nil nil nil nil moddb aliases))
+       ;; get the index of the top-level module within the moddb
+       (modidx (moddb-modname-get-index (design->top design) moddb))
+
+       ;; Process the timing diagram into internal form
+       (orig-ins ins)
+       (orig-overrides overrides)
+       (orig-outs outs)
+       (orig-internals internals)
+       ((mv errs1 ins) (svtv-wires->lhses ins modidx moddb aliases))
+       (input-err (and errs1 (msg "Errors resolving inputs:~%~@0~%" (msg-list errs1))))
+       ((mv errs2 overrides) (svtv-wires->lhses overrides modidx moddb aliases))
+       (override-err (and errs2 (msg "Errors resolving overrides:~%~@0~%" (msg-list errs2))))
+       ;; Outputs and internals are exactly the same for our purposes.
+       ((mv errs3 outs) (svtv-wires->lhses (append outs internals) modidx moddb aliases))
+       (output-err (and errs3 (msg "Errors resolving outputs:~%~@0~%" (msg-list errs3))))
+       ((when (or input-err override-err output-err))
+        (raise "~%~@0" (msg-list (list input-err output-err override-err)))
+        (mv nil nil nil nil nil nil nil nil nil nil nil nil moddb aliases))
+
+       ;; get the total number of phases to simulate and extend the
+       ;; inputs/overrides to that length
+       (nphases (pos-fix (max (svtv-max-length ins)
+                              (max (svtv-max-length overrides)
+                                   (svtv-max-length outs)))))
+       (ins (svtv-expand-lines ins nphases))
+       (overrides (svtv-expand-lines overrides nphases))
+       ;; Each override has a unique test variable (determining if the override
+       ;; happens in a given phase) and override value variable.  This
+       ;; generates them (as tagged indices) and records them in data
+       ;; structures to associate the LHS for each override with its variables
+       ;; and entries.
+       ((mv ovlines ovs) (svtv-lines->overrides overrides 0))
+
+       ;; Apply the overrides to the assigns.  Each wire that is overridden has
+       ;; its gate-level assignment replaced with something like:
+       ;; (if override-this-phase override-value original-assignment)
+       ;; except that extra care is taken to override only the specified range.
+       (assigns (make-fast-alist assigns))
+       (overridden-assigns (svex-apply-overrides ovs assigns))
+       ;; Still need the original assigns in case we need to output the value
+       ;; of a signal on the same phase as we override it.
+       (orig-assigns (make-fast-alist assigns))
+
+
+       (- (fast-alist-free overridden-assigns))
+       ;; Compose together the final (gate-level) assignments to get full
+       ;; update formulas (in terms of PIs and current states), and compose
+       ;; delays with these to get next states.
+       ((mv rewritten-assigns
+            raw-updates
+            updates0
+            rest
+            res1
+            res1-updates
+            res1-updates2
+            updates
+            next-states)
+        (svex-compose-assigns/delays-modified overridden-assigns delays
+                                              :rewrite pre-simplify))
+
+       ;; Compute an initial state of all Xes, or nil (meaning don't substitute
+       ;; the states) if free-initst
+       (states (svex-alist-keys next-states))
+       (initst (if state-machine
+                   (make-fast-alist (pairlis$ states (svarlist-svex-vars states)))
+                 (make-fast-alist (pairlis$ states (replicate (len states) (svex-quote (4vec-x)))))))
+
+       ;; collect the set of all input variables.  We generate a unique
+       ;; variable per phase for each variable (unless it is bound to an STV
+       ;; input variable).
+       (in-vars (acl2::hons-set-diff (cwtime
+                                      (svexlist-collect-vars
+                                       (append (svex-alist-vals updates)
+                                               (svex-alist-vals next-states)))
+                                      :mintime 1)
+                                     (append (svex-alist-keys updates)
+                                             states)))
+
+       ;; Compose the un-overridden gate-level assignments with the update
+       ;; functions (with full overrides).  This gives us a formula for each
+       ;; signal before it itself is overridden, but with all the overrides
+       ;; within its cone intact.
+       (updates-for-outs
+        (with-fast-alist updates
+          (make-fast-alist (svex-alist-compose orig-assigns updates))))
+       (- (fast-alist-free updates)
+          (clear-memoize-table 'svex-compose))
+       ;; Unroll the FSM and collect the formulas for the output signals.
+       ((mv outexprs final-state)
+        (cwtime
+         (svtv-compile-lazy
+          nphases ins ovlines outs initst updates-for-outs next-states in-vars state-machine)
+         :mintime 1))
+
+       (has-duplicate-outputs (acl2::hons-dups-p (svex-alist-keys outexprs)))
+       ((when has-duplicate-outputs)
+        (raise "Duplicated output variable: ~x0" (car has-duplicate-outputs))
+        (mv nil nil nil nil nil nil nil nil nil nil nil nil moddb aliases))
+
+       ((mv outexprs final-state)
+        (svtv-simplify-outs/states outexprs final-state simplify))
+
+       ;; Compute the masks for the input/output varaiables.
+       (inmasks (fast-alist-free (fast-alist-clean (svtv-collect-masks ins))))
+       (override-inmasks (fast-alist-free (fast-alist-clean (svtv-collect-masks overrides))))
+       (outmasks (fast-alist-free (fast-alist-clean (svtv-collect-masks outs)))))
+    (fast-alist-free updates-for-outs)
+    (mv overridden-assigns
+        delays
+        rewritten-assigns
+        raw-updates
+        updates0
+        rest
+        res1
+        res1-updates
+        res1-updates2
+        updates
+        next-states
+        (make-svtv :name           name
+                   :outexprs       outexprs
+                   :nextstate     final-state
+                   :inmasks        (append inmasks override-inmasks)
+                   :outmasks       outmasks
+                   :orig-ins       orig-ins
+                   :orig-overrides orig-overrides
+                   :orig-outs      orig-outs
+                   :orig-internals orig-internals
+                   :expanded-ins       ins
+                   :expanded-overrides overrides
+                   :nphases        nphases)
+        moddb aliases)))
+
+(defconst *$MODNAME$*
+  (change-design *$DESIGN$-sao* :top "$MODNAME$"))
+
+(make-event
+ (b* ((name '|$DESIGN$-svtv|)
+     (ins '(
+      ("$INPUT$" |$INPUT$|)
+      ))
+     (overrides ())
+     (outs '(
+      ("$OUTPUT$" |$OUTPUT$|)
+      ))
+     (internals ())
+     (design *$MODNAME$*)
+     (simplify t)
+     (pre-simplify t)
+     (state-machine t)
+     ((mv overridden-assigns
+          delays
+          rewritten-assigns
+          raw-updates
+          updates0
+          rest
+          res1
+          res1-updates
+          res1-updates2
+          updates
+          next-states
+          svtv)
+      (defsvtv-main-modified
+        name
+        ins
+        overrides
+        outs
+        internals
+        design
+        simplify
+        pre-simplify
+        state-machine))
+     (trace
+      (list
+       :design *$MODNAME$*
+       :overridden-assigns overridden-assigns
+       :delays delays
+       :rewritten-assigns rewritten-assigns
+       :raw-updates raw-updates
+       :updates0 updates0
+       :rest rest
+       :res1 res1
+       :res1-updates res1-updates
+       :res1-updates2 res1-updates2
+       :updates updates
+       :next-states next-states
+       :svtv svtv))
+     (state (serialize-write "$MODNAME$-trace.sao" trace :verbosep t)))
+  (value '(value-triple :serialize-write))))

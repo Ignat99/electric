@@ -1,0 +1,37 @@
+<!-- HEADER 1-4-3: Command-line Access to the savannah.gnu.org Repository -->
+
+Before attempting to build Electric from the savannah.gnu.org,
+you must have these tools installed on your computer:
+<ol>
+<li>JDK 1.6 or later (a JRE is sufficient for running Electric, but a JDK is necessary to build it).</li>
+<li>Subversion.  This is the source-code control system.</li>
+<li>Apache Ant 1.8.0 or later.</li>
+</ol>
+<P>
+The following variable should be defined:<br />
+&nbsp;&nbsp;&nbsp;<b>JAVA_PATH</b> path to JDK root directory
+<P>
+Next, download the latest sources using Subversion.
+The first time you do this, issue these commands:<br />
+&nbsp;&nbsp;&nbsp;<code><font size="-1">cd WORK-DIR</font></code><br />
+&nbsp;&nbsp;&nbsp;<code><font size="-1">svn checkout svn://svn.savannah.gnu.org/electric</font></code><br />
+&nbsp;&nbsp;&nbsp;<code><font size="-1">cd electric</font></code><br />
+Once the code has been downloaded, it can be updated with these commands:<br />
+&nbsp;&nbsp;&nbsp;<code><font size="-1">cd WORK-DIR/electric</font></code><br />
+&nbsp;&nbsp;&nbsp;<code><font size="-1">svn update</font></code>
+<P>
+Next, compile the sources (it takes longer the first time, but works incrementally after that):<br />
+&nbsp;&nbsp;&nbsp;<code><font size="-1">cd WORK-DIR/electric/packaging</font></code><br />
+&nbsp;&nbsp;&nbsp;<code><font size="-1">ant</font></code>
+<P>
+Next run Electric (note that the "X.XX" should be replaced with the current version, for example "9.01"):<br />
+&nbsp;&nbsp;&nbsp;<code><font size="-1">WORK-DIR/electric/packaging/electricPublic-X.XX.jar</font></code><br />
+or:<br />
+&nbsp;&nbsp;&nbsp;<code><font size="-1">java -jar WORK-DIR/electric/packaging/electricPublic-X.XX.jar</font></code><br />
+or:<br />
+&nbsp;&nbsp;&nbsp;<code><font size="-1">java -classpath WORK-DIR/electric/packaging/electricPublic-X.XX.jar com.sun.electric.Launcher</font></code><br />
+<P>
+If your design is large and you need more memory, you can request a larger heap size with this command:<br />
+&nbsp;&nbsp;&nbsp;<code><font size="-1">java -classpath WORK-DIR/electric/packaging/electricPublic-X.XX.jar com.sun.electric.Launcher -Xmx1024m -XX:MaxPermSize=128m</font></code>
+
+<!-- TRAILER -->

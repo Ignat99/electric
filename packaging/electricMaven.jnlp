@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" codebase="http://java.net/projects/electric/downloads/download/" version="9.01">
+  <information>
+    <title>Electric VLSI CAD System</title>
+    <vendor>Static Free Software</vendor>
+    <homepage href="http://www.staticfreesoft.com" />
+    <description kind="short">Electric VLSI CAD System</description>
+    <offline-allowed />
+    <icon href="WebStartFiles%252FIconElectric.gif" />
+    <icon kind="splash" href="WebStartFiles%252FSplashImage.gif" />
+  </information>
+  <security>
+    <all-permissions />
+  </security>
+  <resources>
+    <j2se version="1.5+" />
+    <jar href="WebStartFiles%252Felectric-concurrent-9.01.jar" />
+    <jar href="WebStartFiles%252Felectric-core-9.01.jar" />
+    <jar href="WebStartFiles%252Felectric-test-9.01.jar" />
+    <jar href="WebStartFiles%252Felectric-3d-9.01.jar" />
+    <jar href="WebStartFiles%252Felectric-merge-9.01.jar" />
+    <jar href="WebStartFiles%252Felectric-irsim-api-0.1-alpha-1.jar" />
+    <jar href="WebStartFiles%252Felectric-irsim-0.1-alpha-1.jar" />
+    <jar href="WebStartFiles%252Felectric-movie-api-1.1-alpha.jar" />
+    <jar href="WebStartFiles%252Felectric-movie-jmf-1.0-beta.jar" />
+    <jar href="WebStartFiles%252Felectric-minarea-api-2.0.jar" />
+	<jar href="WebStartFiles%252FlangBindings%252Fbsh-2.0b4.jar" />
+	<jar href="WebStartFiles%252FlangBindings%252Fjython-2.5.0.jar" />
+	<jar href="WebStartFiles%252FlangBindings%252Fscala-library-2.9.1.jar" />
+  </resources>
+  <application-desc main-class="com.sun.electric.Launcher" />
+</jnlp>
