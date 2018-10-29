@@ -111,39 +111,73 @@ When rebuilding Electric, there are some Macintosh vs. non-Macintosh issues to c
 
 1) Start NetBeans 7.0 or later.
 2) Install the Team Server Plugin:
+
    2.1) Use Tools / Plugins and choose the "Available Plugins" tab in the Plugins manager.
+   
    2.2) In the left pane, check the "Team Server" plugin and click "Install".
+   
    2.3) Click "Close" to exit the Plugins manager.
+   
    2.4) Use Window / Services to open the "Services" tab
+   
    2.5) Expand the "Team Server" node and check that the "savannah.gnu.org" Team Server is listed.
+   
 3) Download Electric Sources from savannah.gnu.org .
+
    3.1) Choose File / Open Team Project... from the main menu.
+   
    3.2) Search for electric project
+   
    3.3) Select "Electric: VLSI Design System" and click Open From Team Server
+   
    3.4) Expand "Electric: VLSI Design System" node in the Team tab
+   
    3.5) Expand Sources subnode
+   
    3.6) Click "Source Code Repository (get)"
+   
    3.6) Either enter "Folder To Get" in "Get Sources From Team Server" dialog or click "Browse" button near it.
+   
         The "Folder to Get" of Electric-X.XX is "tags/electric-X.XX" .
+        
         The "Folder to Get" of latest Electric sources is "trunk/electric" .
+        
    3.7) Choose "Local Folder" in "Get Sources From Team Server" where to download Electric Sources.
+   
         The default is "~/NetBeansProjects/electric~svn".
+        
    3.8) Click "Get From Team Server"
+   
    3.9) The "Checkout Completed" dialog will say that project "electric" was checkout.
+   
         It will suggest you to open a project.
+        
    3.10) Click "Open Project..."
+   
    3.11) Choose "electric" and click "Open".
+   
 4) Build Electric
+
    4.1) Right-click "electric" node in "Projects" tab.
+   
    4.2) Choose "Build".
+   
    Electric project is large. If build hangs then it may be necessary to add "-J-Xmx2g" to netbeans_default_options
-   in file <NETBEANS_INSTALLATION>/etc/netbeans.conf . 
+   
+   in file <NETBEANS_INSTALLATION>/etc/netbeans.conf .
+   
 5) Run Electric.
+
    5.1) Choose either "Run > Run Project (electric)" or "Debug > Debug Project (electric)" from the main menu.
+   
 6) Create electric distribution for your organization (optional).
+
    6.1) Right-click at the Electric project icon. Choose "Properties|Configuration|release-profile"
+   
    6.2) Choose "Build|Clean and build main project".
+   
    6.3) Copy ~/NetBeansProjects/electric~svn/electric/target/electric-9.04-a-with-dependencies.jar to a shared location
+   
         in your file system.
 
 ---------------- Building from latest Sources in command-line:
